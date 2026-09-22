@@ -19,7 +19,8 @@ const SCHEDULES = {
       { start: '16:15', end: '17:00', icon: '🏋️‍♂️', title: 'صلاة العصر + متابعة الكوتشينج المركزة', desc: 'صلاة العصر + نصف ساعة لمتدربي الكوتشينج (الرد على الشات وتعديل البرامج) ثم قفل الواتساب تماماً.', type: 'coaching', tag: '#كوتشينج' },
       { start: '17:00', end: '20:15', icon: '📚', title: '[شفت 3] الكورسات والتعلم التقني (3 ساعات وربع)', desc: 'دراسة وتطبيق عملي على الكورسات، بناء مشاريع جديدة وتطوير مهاراتك التقنية بدون مقاطعة.', type: 'courses', tag: '#كورسات_وتعلم' },
       { start: '20:15', end: '21:00', icon: '🕌', title: 'صلاتي المغرب والعشاء + عشاء خفيف', desc: 'أداء صلاتي المغرب والعشاء، تناول وجبة عشاء سريعة خفيفة وغسيل الأطباق فوراً.', type: 'prayer', tag: '#صلاة_وعشاء' },
-      { start: '21:00', end: '22:00', icon: '🧹', title: 'ترويق البيت اليومي (20 د) + مراجعة اليوم وتخطيط الغد', desc: 'تنظيف وترتيب سريع للشقة والمكتب (Clean space = Clean mind) وتفريغ الدماغ في ورقة للغد.', type: 'living', tag: '#ترويق_وتنظيم' },
+      { start: '21:00', end: '21:30', icon: '🧹', title: 'ترويق البيت اليومي (20 د) + مراجعة اليوم وتخطيط الغد', desc: 'تنظيف وترتيب سريع للشقة والمكتب (Clean space = Clean mind) وتفريغ الدماغ في ورقة للغد.', type: 'living', tag: '#ترويق_وتنظيم' },
+      { start: '21:30', end: '22:00', icon: '📞', title: 'مكالمة الأهل اليومية والاطمئنان والترويح', desc: 'الاتصال بالعائلة والاطمئنان عليهم (بر الوالدين وراحة نفسية بعد يوم طويل من الشغل).', type: 'living', tag: '#مكالمة_الأهل' },
       { start: '22:00', end: '23:00', icon: '🛑', title: 'بروتوكول قفل الشاشات والـ Wind-down', desc: 'Hard Stop للابتوب، وضع الموبايل بعيداً عن السرير، وضوء وقراءة الأذكار استعداداً للنوم.', type: 'shutdown', tag: '#حماية_النوم' },
       { start: '23:00', end: '05:00', icon: '💤', title: 'نوم هادئ وعميق (6 ساعات كاملة)', desc: 'نوم في ظلام تام للاستيقاظ 5:00 ص بكامل نشاطك الذهني والبدني لشفت جديد.', type: 'sleep', tag: '#نوم_عميق' }
     ]
@@ -81,7 +82,7 @@ const SCHEDULES = {
       { start: '11:30', end: '13:30', icon: '🕌', title: 'صلاة الجمعة وسماع الخطبة والدعاء', desc: 'الذهاب للمسجد مبكراً وسماع الخطبة وأداء الصلاة.', type: 'prayer', tag: '#صلاة_الجمعة' },
       { start: '13:30', end: '15:00', icon: '🍲', title: 'وجبة الجمعة الخاصة + راحة وغسيل الأواني', desc: 'تناول وجبة غداء مميزة وغسيل الأواني فوراً.', type: 'living', tag: '#غداء_الجمعة' },
       { start: '15:00', end: '17:30', icon: '🎬', title: 'جلسة التصوير المجمعة (Batch Recording)', desc: 'تجهيز الكاميرا والمايك وتسجيل الـ 3 فيديوهات دفعة واحدة ثم إرسالها للبايبلاين.', type: 'content', tag: '#تصوير_محتوى' },
-      { start: '17:30', end: '19:00', icon: '🕌', title: 'صلاتي العصر والمغرب + ساعة إجابة الجمعة', desc: 'الدعاء بالتوفيق في لانش كوتش دريفت والبركة في الرزق والعافية.', type: 'prayer', tag: '#دعاء' },
+      { start: '17:30', end: '19:00', icon: '🛒', title: 'مشوار السوبرماركت الأسبوعي والطلبات + ساعة إجابة الجمعة', desc: 'شراء بروتين وخضار ومستلزمات البيت للأسبوع بالكامل في مشوار واحد منظم، مع دعاء ساعة الاستجابة.', type: 'living', tag: '#سوبرماركت_الأسبوع' },
       { start: '19:00', end: '22:00', icon: '☕', title: 'كورس استكشافي / مشروع حر / ترويح مع أصحاب', desc: 'وقت مرن: كورس جديد، أو جلسة قهوة مع أصحاب بدون ضغط.', type: 'courses', tag: '#ترويح_وكورسات' },
       { start: '22:00', end: '23:00', icon: '🛑', title: 'بروتوكول حماية النوم', desc: 'ترتيب المكان والاستعداد للنوم 11:00 م لبداية أسبوع ناري.', type: 'shutdown', tag: '#حماية_النوم' },
       { start: '23:00', end: '05:00', icon: '💤', title: 'نوم عميق', desc: 'نوم هادئ 6 ساعات.', type: 'sleep', tag: '#نوم' }
@@ -129,10 +130,33 @@ const DEFAULT_HABITS = [
   { id: 'h5', text: '[شفت 2] الكلية أونلاين والمذاكرة والتكليفات (ساعتين وربع)', tag: 'كلية' },
   { id: 'h6', text: '[شفت 3] الكورسات والتعلم التقني والتطبيق (3 ساعات وربع)', tag: 'كورسات' },
   { id: 'h7', text: 'متابعة المتدربين المركزة (30 دقيقة) وقفل الشات', tag: 'كوتشينج' },
-  { id: 'h8', text: 'صلوات العصر والمغرب والعشاء في أوقاتها', tag: 'صلوات' },
-  { id: 'h9', text: 'ترويق البيت السريع (20 دقيقة) ومفيش مواعين بايتة', tag: 'نظافة' },
-  { id: 'h10', text: 'Hard Stop للابتوب وإبعاد الموبايل عن السرير (10:30 م)', tag: '10:30 م' }
+  { id: 'h8', text: 'شرب 3 لتر ماء على مدار اليوم (8 أكواب كاملة)', tag: 'صحة' },
+  { id: 'h9', text: 'صلوات العصر والمغرب والعشاء في أوقاتها', tag: 'صلوات' },
+  { id: 'h10', text: 'ترويق البيت السريع (20 دقيقة) ومفيش مواعين بايتة', tag: 'نظافة' },
+  { id: 'h11', text: 'مكالمة الأهل اليومية والاطمئنان (9:30 م)', tag: 'أهل' },
+  { id: 'h12', text: 'Hard Stop للابتوب وإبعاد الموبايل عن السرير (10:30 م)', tag: '10:30 م' }
 ];
+
+// Initial Living Alone Scratchpad Seed
+const INITIAL_SCRATCHPAD = {
+  groceries: [
+    { id: 'g1', text: 'طبق بيض طازج (30 بيضة)', done: false },
+    { id: 'g2', text: 'صدور فراخ بانيه نظيفة (كيلو ونصف)', done: false },
+    { id: 'g3', text: 'علبة شوفان كامل الحبة كبير', done: true },
+    { id: 'g4', text: 'زبادي يوناني / لبن خالي الدسم', done: false },
+    { id: 'g5', text: 'أكياس خضار مجمد (بسلة وجزر/بروكلي)', done: false },
+    { id: 'g6', text: 'صابون أطباق ومسحوق غسالة', done: false }
+  ],
+  ideas: [
+    { id: 'i1', text: 'Coachdrift: مراجعة RLS Policies لبيانات المشتركين', done: false },
+    { id: 'i2', text: 'فكرة ريلز: إزاي تلتزم بالدايت لو عايش لوحدك ومضغوط', done: false },
+    { id: 'i3', text: 'كورس الـ Backend: تطبيق عملي على Caching و Redis', done: true }
+  ],
+  urgent: [
+    { id: 'u1', text: 'تجديد باقة النت المنزلي قبل انتهاء الميعاد', done: false },
+    { id: 'u2', text: 'تسليم شيت الكلية لمادة النظم العملية', done: false }
+  ]
+};
 
 // State Management
 let currentSelectedDayType = 'auto'; // 'auto' | 'home' | 'saturday' | 'wednesday' | 'friday'
@@ -186,6 +210,38 @@ const zenOverlay = document.getElementById('zenOverlay');
 const exitZenBtn = document.getElementById('exitZenBtn');
 const pwaInstallBtn = document.getElementById('pwaInstallBtn');
 const appToast = document.getElementById('appToast');
+
+// Sound & Audio Toggle
+const soundToggleBtn = document.getElementById('soundToggleBtn');
+const soundIcon = document.getElementById('soundIcon');
+const soundLabel = document.getElementById('soundLabel');
+
+// Focus Pomodoro Timer DOM Elements
+const timerDisplay = document.getElementById('timerDisplay');
+const timerStateBadge = document.getElementById('timerStateBadge');
+const timerTaskInput = document.getElementById('timerTaskInput');
+const timerToggleBtn = document.getElementById('timerToggleBtn');
+const timerToggleLabel = document.getElementById('timerToggleLabel');
+const timerResetBtn = document.getElementById('timerResetBtn');
+const timerProgressFill = document.getElementById('timerProgressFill');
+const timerModeBtns = document.querySelectorAll('.timer-mode-btn');
+
+// Hydration Tracker DOM Elements
+const waterCupsRow = document.getElementById('waterCupsRow');
+const waterConsumedCount = document.getElementById('waterConsumedCount');
+const waterLitersText = document.getElementById('waterLitersText');
+const addCupBtn = document.getElementById('addCupBtn');
+const resetWaterBtn = document.getElementById('resetWaterBtn');
+
+// Scratchpad Hub DOM Elements
+const scratchTabs = document.querySelectorAll('.scratch-tab');
+const scratchAddForm = document.getElementById('scratchAddForm');
+const scratchInput = document.getElementById('scratchInput');
+const scratchList = document.getElementById('scratchList');
+const countGroceriesEl = document.getElementById('countGroceries');
+const countIdeasEl = document.getElementById('countIdeas');
+const countUrgentEl = document.getElementById('countUrgent');
+const clearCompletedScratchBtn = document.getElementById('clearCompletedScratchBtn');
 
 // Helpers: Time Parsing & Current Day Detection
 function getTodayDayScheduleKey() {
@@ -488,6 +544,7 @@ function renderHabits(habits) {
       habit.completed = !habit.completed;
       saveHabits(habits);
       if (habit.completed) {
+        AudioService.playChime();
         showToast('✓ عاش يا بطل! استمر!');
       }
     });
@@ -733,14 +790,436 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// ==========================================================================
+// Audio & Chime Service (Pure Web Audio API Synthesizer)
+// ==========================================================================
+const AudioService = {
+  ctx: null,
+  isMuted: localStorage.getItem('nooreldean_sound_muted') === 'true',
+  init() {
+    if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  },
+  toggleMute() {
+    this.isMuted = !this.isMuted;
+    localStorage.setItem('nooreldean_sound_muted', String(this.isMuted));
+    this.updateUI();
+    return this.isMuted;
+  },
+  updateUI() {
+    if (!soundToggleBtn) return;
+    if (this.isMuted) {
+      soundToggleBtn.classList.add('is-muted');
+      if (soundIcon) soundIcon.textContent = '🔇';
+      if (soundLabel) soundLabel.textContent = 'الصوت مكتوم';
+    } else {
+      soundToggleBtn.classList.remove('is-muted');
+      if (soundIcon) soundIcon.textContent = '🔔';
+      if (soundLabel) soundLabel.textContent = 'الصوت مفعّل';
+    }
+  },
+  playChime() {
+    if (this.isMuted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, now); // D5
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.38);
+    } catch (e) {}
+  },
+  playAlarm() {
+    if (this.isMuted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        const now = this.ctx.currentTime + (idx * 0.14);
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      });
+    } catch (e) {}
+  }
+};
+
+// Sound toggle button click
+if (soundToggleBtn) {
+  soundToggleBtn.addEventListener('click', () => {
+    const muted = AudioService.toggleMute();
+    showToast(muted ? 'تم كتم التنبيهات الصوتية' : 'تم تفعيل التنبيهات الصوتية 🔔');
+    if (!muted) AudioService.playChime();
+  });
+}
+
+// ==========================================================================
+// Focus Deep Work Pomodoro Timer
+// ==========================================================================
+let timerTotalSeconds = 25 * 60;
+let timerRemainingSeconds = 25 * 60;
+let timerInterval = null;
+let timerIsRunning = false;
+
+function formatTimerDigits(totalSec) {
+  const m = Math.floor(totalSec / 60);
+  const s = totalSec % 60;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function updateTimerDisplay() {
+  if (timerDisplay) {
+    timerDisplay.textContent = formatTimerDigits(timerRemainingSeconds);
+  }
+  if (timerProgressFill) {
+    const pct = Math.max(0, Math.min(100, (timerRemainingSeconds / timerTotalSeconds) * 100));
+    timerProgressFill.style.width = `${pct}%`;
+  }
+}
+
+function toggleTimer() {
+  if (timerIsRunning) {
+    // Pause
+    clearInterval(timerInterval);
+    timerIsRunning = false;
+    timerToggleBtn.classList.add('is-paused');
+    timerToggleBtn.querySelector('.btn-icon').textContent = '▶️';
+    timerToggleLabel.textContent = 'استئناف';
+    timerStateBadge.textContent = 'مؤقت متوقف';
+    timerStateBadge.classList.remove('is-running');
+  } else {
+    // Start
+    AudioService.init();
+    timerIsRunning = true;
+    timerToggleBtn.classList.remove('is-paused');
+    timerToggleBtn.querySelector('.btn-icon').textContent = '⏸️';
+    timerToggleLabel.textContent = 'إيقاف مؤقت';
+    timerStateBadge.textContent = 'جلسة تركيز جارية ⚡';
+    timerStateBadge.classList.add('is-running');
+
+    timerInterval = setInterval(() => {
+      if (timerRemainingSeconds > 0) {
+        timerRemainingSeconds--;
+        updateTimerDisplay();
+      } else {
+        // Complete!
+        clearInterval(timerInterval);
+        timerIsRunning = false;
+        timerToggleBtn.querySelector('.btn-icon').textContent = '▶️';
+        timerToggleLabel.textContent = 'بدء التركيز';
+        timerStateBadge.textContent = 'انتهت الجلسة بنجاح! 🎉';
+        timerStateBadge.classList.remove('is-running');
+        AudioService.playAlarm();
+        const taskName = (timerTaskInput && timerTaskInput.value.trim()) || 'جلستك';
+        showToast(`🎉 عاش يا بطل! أتممت بنجاح: ${taskName}`);
+      }
+    }, 1000);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerIsRunning = false;
+  timerRemainingSeconds = timerTotalSeconds;
+  if (timerToggleBtn) {
+    timerToggleBtn.classList.remove('is-paused');
+    timerToggleBtn.querySelector('.btn-icon').textContent = '▶️';
+    timerToggleLabel.textContent = 'بدء التركيز';
+  }
+  if (timerStateBadge) {
+    timerStateBadge.textContent = 'جاهز للبدء';
+    timerStateBadge.classList.remove('is-running');
+  }
+  updateTimerDisplay();
+}
+
+function setTimerPreset(minutes) {
+  timerTotalSeconds = minutes * 60;
+  resetTimer();
+}
+
+if (timerToggleBtn) {
+  timerToggleBtn.addEventListener('click', toggleTimer);
+}
+
+if (timerResetBtn) {
+  timerResetBtn.addEventListener('click', resetTimer);
+}
+
+timerModeBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    timerModeBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const mins = parseInt(btn.dataset.time, 10);
+    setTimerPreset(mins);
+    showToast(`تم ضبط المؤقت على ${mins} دقيقة`);
+  });
+});
+
+// ==========================================================================
+// Hydration Tracker (Target 3 Liters / 8 Cups)
+// ==========================================================================
+function getWaterStorageKey() {
+  const todayStr = new Date().toISOString().split('T')[0];
+  return `nooreldean_water_${todayStr}`;
+}
+
+function getWaterCount() {
+  const saved = localStorage.getItem(getWaterStorageKey());
+  return saved ? parseInt(saved, 10) || 0 : 0;
+}
+
+function saveWaterCount(count) {
+  const clamped = Math.max(0, Math.min(8, count));
+  localStorage.setItem(getWaterStorageKey(), String(clamped));
+  renderHydration();
+}
+
+function renderHydration() {
+  const count = getWaterCount();
+  if (waterConsumedCount) waterConsumedCount.textContent = count;
+  const liters = (count * 0.375).toFixed(1);
+  if (waterLitersText) waterLitersText.textContent = `(${liters} لتر)`;
+
+  if (!waterCupsRow) return;
+  waterCupsRow.innerHTML = '';
+
+  for (let i = 1; i <= 8; i++) {
+    const isDrank = i <= count;
+    const cupBtn = document.createElement('button');
+    cupBtn.type = 'button';
+    cupBtn.className = `water-cup-btn ${isDrank ? 'is-drank' : ''}`;
+    cupBtn.title = `كوب ${i}: 375 مل`;
+    cupBtn.innerHTML = `
+      <span class="water-cup-icon">💧</span>
+      <span class="water-cup-label">${i}</span>
+    `;
+
+    cupBtn.addEventListener('click', () => {
+      const newCount = (count === i) ? i - 1 : i;
+      saveWaterCount(newCount);
+      if (newCount > count) {
+        AudioService.playChime();
+        if (newCount === 8) {
+          showToast('🌊 وحش! حققت هدف الـ 3 لتر ماء اليوم كاملين!');
+        } else {
+          showToast(`💧 كوب ${newCount} تم شربه! استمر.`);
+        }
+      }
+    });
+
+    waterCupsRow.appendChild(cupBtn);
+  }
+}
+
+if (addCupBtn) {
+  addCupBtn.addEventListener('click', () => {
+    const current = getWaterCount();
+    if (current < 8) {
+      saveWaterCount(current + 1);
+      AudioService.playChime();
+      showToast(`💧 كوب ${current + 1} تم شربه! عاش.`);
+      if (current + 1 === 8) {
+        showToast('🌊 أسطورة! أكملت 3 لتر ماء كاملة لليوم!');
+      }
+    } else {
+      showToast('أتممت الـ 8 أكواب كاملة لليوم بحمد الله!');
+    }
+  });
+}
+
+if (resetWaterBtn) {
+  resetWaterBtn.addEventListener('click', () => {
+    if (confirm('هل ترغب في إعادة ضبط عداد شرب الماء لليوم؟')) {
+      saveWaterCount(0);
+      showToast('تم تصفير عداد شرب الماء.');
+    }
+  });
+}
+
+// ==========================================================================
+// Living Alone Scratchpad & Groceries Hub
+// ==========================================================================
+let currentScratchTab = 'groceries';
+
+function getScratchData() {
+  const saved = localStorage.getItem('nooreldean_scratchpad_data');
+  if (saved) {
+    try {
+      return JSON.parse(saved);
+    } catch (e) {
+      return INITIAL_SCRATCHPAD;
+    }
+  }
+  return INITIAL_SCRATCHPAD;
+}
+
+function saveScratchData(data) {
+  localStorage.setItem('nooreldean_scratchpad_data', JSON.stringify(data));
+  renderScratchpad();
+}
+
+function updateScratchBadges(data) {
+  if (countGroceriesEl) countGroceriesEl.textContent = data.groceries.filter(i => !i.done).length;
+  if (countIdeasEl) countIdeasEl.textContent = data.ideas.filter(i => !i.done).length;
+  if (countUrgentEl) countUrgentEl.textContent = data.urgent.filter(i => !i.done).length;
+}
+
+function renderScratchpad() {
+  const data = getScratchData();
+  updateScratchBadges(data);
+
+  if (!scratchList) return;
+  scratchList.innerHTML = '';
+
+  const items = data[currentScratchTab] || [];
+
+  if (items.length === 0) {
+    scratchList.innerHTML = `
+      <li style="text-align:center; color:var(--text-dim); padding:1rem; font-size:0.8rem;">
+        القائمة فارغة حالياً. أضف عناصر جديدة من النموذج بالأعلى ✍️
+      </li>
+    `;
+    return;
+  }
+
+  items.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.className = `scratch-item ${item.done ? 'is-done' : ''}`;
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'scratch-item-content';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'scratch-item-checkbox';
+    checkbox.checked = !!item.done;
+
+    const span = document.createElement('span');
+    span.className = 'scratch-item-text';
+    span.textContent = item.text;
+
+    contentDiv.appendChild(checkbox);
+    contentDiv.appendChild(span);
+
+    contentDiv.addEventListener('click', (e) => {
+      e.stopPropagation();
+      item.done = !item.done;
+      saveScratchData(data);
+      if (item.done) AudioService.playChime();
+    });
+
+    const delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'scratch-delete-btn';
+    delBtn.innerHTML = '&times;';
+    delBtn.title = 'حذف هذا العنصر';
+    delBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      items.splice(index, 1);
+      saveScratchData(data);
+      showToast('تم حذف العنصر بنجاح.');
+    });
+
+    li.appendChild(contentDiv);
+    li.appendChild(delBtn);
+    scratchList.appendChild(li);
+  });
+}
+
+// Scratchpad category tabs
+scratchTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    scratchTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentScratchTab = tab.dataset.tab;
+
+    // Update input placeholder according to tab
+    if (scratchInput) {
+      if (currentScratchTab === 'groceries') {
+        scratchInput.placeholder = 'أضف غرض جديد للسوبرماركت (مثال: بيض، شوفان، صدور فراخ)...';
+      } else if (currentScratchTab === 'ideas') {
+        scratchInput.placeholder = 'أضف فكرة كود أو ميزة سريعة (مثال: تجربة Supabase RPC)...';
+      } else {
+        scratchInput.placeholder = 'أضف مهمة طارئة (مثال: دفع فاتورة، تسليم شيت)...';
+      }
+    }
+    renderScratchpad();
+  });
+});
+
+// Add new item to current scratchpad tab
+if (scratchAddForm) {
+  scratchAddForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = scratchInput.value.trim();
+    if (!text) return;
+
+    const data = getScratchData();
+    if (!data[currentScratchTab]) data[currentScratchTab] = [];
+
+    data[currentScratchTab].unshift({
+      id: `item-${Date.now()}`,
+      text: text,
+      done: false
+    });
+
+    saveScratchData(data);
+    scratchInput.value = '';
+    showToast('تمت الإضافة بنجاح!');
+  });
+}
+
+// Clear completed items from current tab
+if (clearCompletedScratchBtn) {
+  clearCompletedScratchBtn.addEventListener('click', () => {
+    const data = getScratchData();
+    const beforeCount = (data[currentScratchTab] || []).length;
+    data[currentScratchTab] = (data[currentScratchTab] || []).filter(item => !item.done);
+    const removedCount = beforeCount - data[currentScratchTab].length;
+
+    if (removedCount > 0) {
+      saveScratchData(data);
+      showToast(`تم مسح ${removedCount} عنصر مكتمل بنجاح!`);
+    } else {
+      showToast('لا توجد عناصر مكتملة لمسحها.');
+    }
+  });
+}
+
+// ==========================================================================
 // Initialization Loop
+// ==========================================================================
 function init() {
+  AudioService.updateUI();
   updateClock();
   updateSprintCountdown();
   renderTimeline();
   updateActiveBlock();
   loadHabits();
   renderContentIdeas();
+  updateTimerDisplay();
+  renderHydration();
+  renderScratchpad();
 
   // Tickers
   setInterval(updateClock, 1000);

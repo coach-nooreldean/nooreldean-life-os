@@ -47,6 +47,10 @@
 
       <!-- Quick Actions -->
       <div class="header-actions">
+        <button id="soundToggleBtn" class="btn-action btn-sound" title="كتم/تفعيل التنبيهات الصوتية">
+          <span class="btn-icon" id="soundIcon">🔔</span>
+          <span class="btn-label" id="soundLabel">الصوت مفعّل</span>
+        </button>
         <button id="shutdownToggleBtn" class="btn-action btn-shutdown" title="تفعيل وضع الإغلاق المسائي وحماية النوم">
           <span class="btn-icon">🌙</span>
           <span class="btn-label">وضع الإغلاق 10م</span>
@@ -128,6 +132,48 @@
         </div>
         <div class="sprint-footer">
           <span class="sprint-hint">💡 قاعدة اللانش: ممنوع إضافة أي فيوتشر جديدة؛ التركيز 100% على الاستقرار والـ Sync والـ RLS.</span>
+        </div>
+      </div>
+
+      <!-- Widget 3: Deep Work Pomodoro Focus Timer -->
+      <div class="card focus-timer-card" id="focusTimerWidget">
+        <div class="widget-header">
+          <div class="pulse-indicator">
+            <span class="pulse-dot pulse-cyan"></span>
+            <span class="widget-tag tag-cyan">⏱️ تايمر التركيز العميق (Deep Work)</span>
+          </div>
+          <div class="timer-mode-selector">
+            <button class="timer-mode-btn active" data-time="25" title="بومودورو كلاسيكي 25 دقيقة">25 د</button>
+            <button class="timer-mode-btn" data-time="50" title="جلسة ديب وورك مكثفة 50 دقيقة">50 د</button>
+            <button class="timer-mode-btn" data-time="90" title="شفت كامل 90 دقيقة">90 د</button>
+          </div>
+        </div>
+        <div class="focus-timer-body">
+          <div class="timer-display-wrap">
+            <div class="timer-digits" id="timerDisplay">25:00</div>
+            <div class="timer-state-badge" id="timerStateBadge">جاهز للبدء</div>
+          </div>
+          <div class="timer-input-wrap">
+            <input type="text" id="timerTaskInput" class="timer-task-input" placeholder="ما هي المهمة التي تركز عليها الآن؟ (مثال: كود Coachdrift Auth)">
+          </div>
+          <div class="timer-controls">
+            <button id="timerToggleBtn" class="btn-timer-primary">
+              <span class="btn-icon">▶️</span>
+              <span id="timerToggleLabel">بدء التركيز</span>
+            </button>
+            <button id="timerResetBtn" class="btn-timer-secondary" title="إعادة ضبط المؤقت">
+              <span class="btn-icon">🔄</span>
+              <span>إعادة ضبط</span>
+            </button>
+          </div>
+          <div class="timer-progress-container">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill progress-cyan" id="timerProgressFill" style="width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="focus-timer-footer">
+          <span class="focus-hint">🎧 نصيحة: اقفل السوشيال ميديا وحط الموبايل بعيد؛ التركيز الصافي يصنع المعجزات.</span>
         </div>
       </div>
 
@@ -226,6 +272,71 @@
             <input type="text" id="customTaskInput" placeholder="أضف مهمة إضافية لليوم..." required>
             <button type="submit" class="btn-add-task">+</button>
           </form>
+        </div>
+
+        <!-- Hydration Tracker (Target 3 Liters / 8 Glasses) -->
+        <div class="card hydration-card" id="hydrationWidget">
+          <div class="column-header">
+            <div>
+              <div class="header-with-badge">
+                <h2 class="column-title">💧 عداد شرب الماء (3 لتر يومياً)</h2>
+                <span class="widget-tag tag-cyan" id="waterGoalBadge">الهدف: 8 أكواب</span>
+              </div>
+              <p class="column-desc">الوقود الأساسي لصفاء دماغ المبرمج والكوتش (امنع الصداع والإجهاد)</p>
+            </div>
+            <button class="btn-text" id="resetWaterBtn" title="تصفير عداد اليوم">تصفير</button>
+          </div>
+          <div class="water-body">
+            <div class="water-cups-row" id="waterCupsRow">
+              <!-- 8 water cups rendered dynamically via JS -->
+            </div>
+            <div class="water-controls">
+              <div class="water-meta">
+                <span class="water-stat-num" id="waterConsumedCount">0</span>
+                <span class="water-stat-total">/ 8 أكواب</span>
+                <span class="water-liters-badge" id="waterLitersText">(0.0 لتر)</span>
+              </div>
+              <button id="addCupBtn" class="btn-action btn-water-add">
+                <span class="btn-icon">🥛</span>
+                <span>+ شربت كوب ماء (375 مل)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Living Alone Scratchpad & Groceries Hub -->
+        <div class="card scratchpad-card" id="scratchpadWidget">
+          <div class="column-header">
+            <div>
+              <h2 class="column-title">📝 مفكرة الشغل ونواقص البيت</h2>
+              <p class="column-desc">دون أي طلب أو فكرة برمجية طارئة فوراً بدون ما تفقد تركيزك</p>
+            </div>
+            <button class="btn-text" id="clearCompletedScratchBtn" title="حذف العناصر المكتملة">تنظيف المكتمل 🗑️</button>
+          </div>
+
+          <!-- Scratchpad Category Tabs -->
+          <div class="scratch-tabs">
+            <button class="scratch-tab active" data-tab="groceries" id="tabScratchGroceries">
+              🛒 طلبات السوبرماركت <span class="scratch-badge" id="countGroceries">0</span>
+            </button>
+            <button class="scratch-tab" data-tab="ideas" id="tabScratchIdeas">
+              💡 أفكار وكود <span class="scratch-badge" id="countIdeas">0</span>
+            </button>
+            <button class="scratch-tab" data-tab="urgent" id="tabScratchUrgent">
+              ⚡ مهام طارئة <span class="scratch-badge" id="countUrgent">0</span>
+            </button>
+          </div>
+
+          <!-- Scratchpad Input -->
+          <form class="scratch-add-form" id="scratchAddForm">
+            <input type="text" id="scratchInput" placeholder="أضف غرض جديد للسوبرماركت (مثال: بيض، شوفان، صدور فراخ)..." required>
+            <button type="submit" class="btn-add-task">+</button>
+          </form>
+
+          <!-- Scratchpad List -->
+          <ul class="scratch-list" id="scratchList">
+            <!-- Dynamically populated via JS -->
+          </ul>
         </div>
 
         <!-- Content Engine & Series Vault -->
