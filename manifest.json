@@ -1,0 +1,21 @@
+{
+  "name": "Nooreldean Life OS | نظام إدارة الحياة",
+  "short_name": "Life OS",
+  "description": "نظام تشغيل الحياة اليومي والتايم تابل التفاعلي لنور الدين",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0d14",
+  "theme_color": "#0a0d14",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "lifestyle", "utilities"]
+}

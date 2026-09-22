@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0d14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Nooreldean OS">
+  <meta name="description" content="نظام تشغيل الحياة اليومي والتايم تابل التفاعلي للمهندس والكوتش نور الدين">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+
+  <title>Nooreldean Life OS | نظام تشغيل الحياة</title>
+
+  <!-- Google Fonts: Cairo & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="./icon.svg" alt="Life OS Icon" class="brand-logo" width="46" height="46">
+        <div class="brand-text">
+          <h1 class="brand-title">NOORELDEAN <span class="badge-os">LIFE OS</span></h1>
+          <p class="brand-subtitle">نظام التركيز، الصلوات، وسبرنت كوتش دريفت</p>
+        </div>
+      </div>
+
+      <!-- Live Clock & Today's State -->
+      <div class="header-clock-card">
+        <div class="clock-time" id="liveClock">00:00:00</div>
+        <div class="clock-meta">
+          <span class="day-badge" id="currentDayBadge">جاري التحديد...</span>
+          <span class="date-str" id="currentDateStr">2026-09-22</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="header-actions">
+        <button id="shutdownToggleBtn" class="btn-action btn-shutdown" title="تفعيل وضع الإغلاق المسائي وحماية النوم">
+          <span class="btn-icon">🌙</span>
+          <span class="btn-label">وضع الإغلاق 10م</span>
+        </button>
+        <button id="pwaInstallBtn" class="btn-action btn-install" style="display: none;" title="تثبيت التطبيق على جهازك">
+          <span class="btn-icon">📲</span>
+          <span class="btn-label">تثبيت التطبيق</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- Top Highlights Widgets Grid -->
+    <section class="top-widgets-grid">
+      
+      <!-- Widget 1: Current Active Block Card -->
+      <div class="card active-block-card" id="activeBlockWidget">
+        <div class="widget-header">
+          <div class="pulse-indicator">
+            <span class="pulse-dot"></span>
+            <span class="widget-tag">البلوك النشط الآن</span>
+          </div>
+          <span class="active-block-remaining" id="activeBlockRemaining">متبقي -- دقيقة</span>
+        </div>
+        <div class="active-block-body">
+          <div class="active-block-icon" id="activeBlockIcon">⏳</div>
+          <div class="active-block-details">
+            <div class="active-block-time" id="activeBlockTime">--:-- - --:--</div>
+            <h2 class="active-block-title" id="activeBlockTitle">جاري تحميل البلوك...</h2>
+            <p class="active-block-desc" id="activeBlockDesc">جاري مزامنة الجدول مع الوقت الفعلي...</p>
+          </div>
+        </div>
+        <div class="active-block-footer">
+          <span class="next-block-label">التالي:</span>
+          <span class="next-block-text" id="nextBlockText">--</span>
+        </div>
+      </div>
+
+      <!-- Widget 2: Coachdrift 10/10 Launch Sprint -->
+      <div class="card sprint-card">
+        <div class="widget-header">
+          <span class="widget-tag tag-gold">🚀 سبرنت كوتش دريفت (P0)</span>
+          <span class="sprint-target-date">اللانش: 10 أكتوبر 2026</span>
+        </div>
+        <div class="sprint-body">
+          <div class="countdown-grid">
+            <div class="countdown-box">
+              <span class="cd-num" id="cdDays">17</span>
+              <span class="cd-unit">يوم</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-box">
+              <span class="cd-num" id="cdHours">23</span>
+              <span class="cd-unit">ساعة</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-box">
+              <span class="cd-num" id="cdMinutes">45</span>
+              <span class="cd-unit">دقيقة</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-box">
+              <span class="cd-num" id="cdSeconds">12</span>
+              <span class="cd-unit">ثانية</span>
+            </div>
+          </div>
+          <div class="sprint-progress-container">
+            <div class="sprint-progress-meta">
+              <span class="phase-title" id="sprintPhase">المرحلة 1: تجميد الميزات (Feature Freeze)</span>
+              <span class="phase-percent" id="sprintPercent">45%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="sprintProgressFill" style="width: 45%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="sprint-footer">
+          <span class="sprint-hint">💡 قاعدة اللانش: ممنوع إضافة أي فيوتشر جديدة؛ التركيز 100% على الاستقرار والـ Sync والـ RLS.</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Schedule View Tabs Navigation -->
+    <nav class="schedule-nav-tabs" aria-label="أنواع الأيام">
+      <button class="nav-tab active" data-day-type="auto" id="tabAuto">
+        <span class="tab-icon">⚡</span>
+        <span class="tab-text">اليوم الفعلي</span>
+        <span class="tab-pill" id="autoTabPill">تلقائي</span>
+      </button>
+      <button class="nav-tab" data-day-type="home" id="tabHome">
+        <span class="tab-icon">🏠</span>
+        <span class="tab-text">أيام البيت</span>
+        <span class="tab-sub">أحد • إثنين • ثلاثاء • خميس</span>
+      </button>
+      <button class="nav-tab" data-day-type="saturday" id="tabSaturday">
+        <span class="tab-icon">🎓</span>
+        <span class="tab-text">السبت (كلية طويلة)</span>
+        <span class="tab-sub">8 ص - 6 م</span>
+      </button>
+      <button class="nav-tab" data-day-type="wednesday" id="tabWednesday">
+        <span class="tab-icon">⏱️</span>
+        <span class="tab-text">الأربعاء (نصف يوم)</span>
+        <span class="tab-sub">8 ص - 2 ظ</span>
+      </button>
+      <button class="nav-tab" data-day-type="friday" id="tabFriday">
+        <span class="tab-icon">🎬</span>
+        <span class="tab-text">الجمعة (محتوى وراحة)</span>
+        <span class="tab-sub">تصوير مجمع • عائلة</span>
+      </button>
+    </nav>
+
+    <!-- Two Columns Layout: Timeline + Habits & Content -->
+    <div class="content-columns">
+      
+      <!-- Column 1: Hourly Timeline Schedule -->
+      <section class="timeline-column">
+        <div class="card timeline-card">
+          <div class="column-header">
+            <div class="title-with-badge">
+              <h2 class="column-title" id="timelineTitle">الجدول الزمني لأيام البيت والشغل المكثف</h2>
+              <span class="day-category-badge" id="timelineBadge">5.5 ساعة Deep Work</span>
+            </div>
+            <div class="timeline-filters">
+              <button class="filter-btn active" data-filter="all">الكل</button>
+              <button class="filter-btn" data-filter="deepwork">البرمجة 💻</button>
+              <button class="filter-btn" data-filter="prayer">الصلوات 🕌</button>
+              <button class="filter-btn" data-filter="coaching">الكوتشينج 🏋️‍♂️</button>
+            </div>
+          </div>
+
+          <!-- Schedule Timeline List -->
+          <div class="timeline-list" id="timelineList">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Column 2: Habits & Content Engine -->
+      <section class="side-column">
+
+        <!-- Habits & Daily Checklist Card -->
+        <div class="card habits-card">
+          <div class="column-header">
+            <div>
+              <h2 class="column-title">لوحة العادات والالتزام اليومي</h2>
+              <p class="column-desc">سجل إنجازاتك اليومية لتحفيز الاستمرارية ومحاربة التسويف</p>
+            </div>
+            <button class="btn-text" id="resetHabitsBtn" title="تصفير القائمة لبدء يوم جديد">تصفير اليوم</button>
+          </div>
+
+          <!-- Habit Progress Bar -->
+          <div class="habit-score-box">
+            <div class="score-meta">
+              <span class="score-label">نسبة الإنجاز اليومي:</span>
+              <span class="score-val" id="habitScorePercent">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill progress-emerald" id="habitProgressBar" style="width: 0%;"></div>
+            </div>
+            <p class="score-msg" id="habitScoreMsg">صباح الخير! ابدأ يومك بصلاة الفجر وساعات البكور.</p>
+          </div>
+
+          <!-- Checklist Items -->
+          <ul class="habits-list" id="habitsList">
+            <!-- Populated via JS -->
+          </ul>
+
+          <!-- Add custom task -->
+          <form class="add-task-form" id="addTaskForm">
+            <input type="text" id="customTaskInput" placeholder="أضف مهمة إضافية لليوم..." required>
+            <button type="submit" class="btn-add-task">+</button>
+          </form>
+        </div>
+
+        <!-- Content Engine & Series Vault -->
+        <div class="card content-vault-card">
+          <div class="column-header">
+            <div>
+              <h2 class="column-title">سلاسل وصناعة المحتوى 🎬</h2>
+              <p class="column-desc">جلسة كتابة وتصوير مجمعة أسبوعياً لزيادة المبيعات</p>
+            </div>
+            <button class="btn-primary-sm" id="addNewIdeaBtn">+ فكرة جديدة</button>
+          </div>
+
+          <!-- Series Selector Tabs -->
+          <div class="series-nav">
+            <button class="series-tab active" data-series="workout">🏋️‍♂️ إزاي تمرن نفسك</button>
+            <button class="series-tab" data-series="diet">🥗 إزاي تعمل دايت</button>
+            <button class="series-tab" data-series="all">كل الأفكار</button>
+          </div>
+
+          <!-- Content Ideas List -->
+          <div class="content-cards-container" id="contentCardsContainer">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+        <!-- 10:00 PM Shutdown Protocol Reference Card -->
+        <div class="card shutdown-info-card">
+          <div class="shutdown-banner">
+            <span class="shutdown-banner-icon">🛑</span>
+            <div class="shutdown-banner-text">
+              <h3>بروتوكول حماية النوم (10:00 PM)</h3>
+              <p>يومك وصحيانك 5:00 الفجر بيبدأ الليلة الساعة 10:00 بالليل</p>
+            </div>
+          </div>
+          <ul class="shutdown-steps">
+            <li><strong>10:00 م:</strong> Hard Stop للابتوب وقفل الكود نهائياً.</li>
+            <li><strong>10:15 م:</strong> تفريغ الدماغ (كتابة أهم 3 أولويات للغد).</li>
+            <li><strong>10:30 م:</strong> تفعيل Do Not Disturb ووضع الموبايل بعيداً عن السرير.</li>
+            <li><strong>11:00 م:</strong> نوم هادئ في الظلام التام لصلاة الفجر بنشاط.</li>
+          </ul>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal for Adding New Content Idea -->
+  <div class="modal-overlay" id="ideaModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">إضافة فكرة فيديو جديدة</h3>
+        <button class="modal-close" id="closeIdeaModal">&times;</button>
+      </div>
+      <form id="ideaForm" class="modal-form">
+        <div class="form-group">
+          <label for="ideaSeries">السلسلة:</label>
+          <select id="ideaSeries" required>
+            <option value="workout">إزاي تمرن نفسك (Workout Series)</option>
+            <option value="diet">إزاي تعمل دايت لنفسك (Diet Series)</option>
+            <option value="general">محتوى عام / كوتشينج</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ideaTitle">عنوان الفيديو / الموضوع:</label>
+          <input type="text" id="ideaTitle" placeholder="مثال: إزاي تختار عدد المجموعات المناسب لجسمك" required>
+        </div>
+        <div class="form-group">
+          <label for="ideaHook">الخطاف (Hook - أول 3 ثوانٍ):</label>
+          <input type="text" id="ideaHook" placeholder="مثال: لو بتدخل الجيم ومش عارف تبدأ بإيه..." required>
+        </div>
+        <div class="form-group">
+          <label for="ideaCta">الدعوة للفعل (CTA):</label>
+          <input type="text" id="ideaCta" placeholder="مثال: ابعتلي 'تمرين' في الرسايل عشان أساعدك" required>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="cancelIdeaModal">إلغاء</button>
+          <button type="submit" class="btn-primary">حفظ الفكرة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shutdown Zen Mode Fullscreen Overlay -->
+  <div class="zen-overlay" id="zenOverlay">
+    <div class="zen-content">
+      <div class="zen-moon">🌙</div>
+      <h2 class="zen-title">حـان وقـت إغـلاق الشـاشات</h2>
+      <p class="zen-subtitle">لقد أتممت يومك بنجاح. عقلك وجسدك يحتاجان الراحة لتستيقظ لصلاة الفجر بكامل قوتك.</p>
+      
+      <div class="zen-checklist">
+        <label class="zen-check-item">
+          <input type="checkbox" id="zenCheck1">
+          <span>قمت بحفظ الشغل وإغلاق شاشة اللابتوب نهائياً.</span>
+        </label>
+        <label class="zen-check-item">
+          <input type="checkbox" id="zenCheck2">
+          <span>كتبت أهم 3 مهام لبكرة في ورقة خارجية لإراحة عقلك.</span>
+        </label>
+        <label class="zen-check-item">
+          <input type="checkbox" id="zenCheck3">
+          <span>فعلت وضع عدم الإزعاج ووضعت الموبايل بعيداً عن السرير.</span>
+        </label>
+        <label class="zen-check-item">
+          <input type="checkbox" id="zenCheck4">
+          <span>توضأت واستعددت لأذكار النوم والنوم الهادئ.</span>
+        </label>
+      </div>
+
+      <button class="btn-exit-zen" id="exitZenBtn">العودة للجدول</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="appToast">تم الحفظ بنجاح!</div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
