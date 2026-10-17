@@ -3,100 +3,121 @@
  * Fully responsive, offline-ready, dynamic schedule resolution
  */
 
-// Schedule Data Architecture (Beast Mode: 11.5+ hours work, courses, living alone workflow)
+// Schedule Data Architecture (Balanced Beast Mode: Live Streams, Talabat Shifts, 4 Learning Paths, College & Video Creation)
 const SCHEDULES = {
-  home: {
-    id: 'home',
-    name: 'أيام البيت والشغل المكثف (Beast Mode)',
-    badge: '10.5+ ساعة إنتاجية (كود + كورسات + كلية) + نوم 8 ساعات',
-    category: 'home',
+  live_study: {
+    id: 'live_study',
+    name: 'أيام لايف Study With Me (12 ساعة تركيز ومذاكرة)',
+    badge: '🔴 لايف 7ص-7م (برمجة + UI/UX + إنجليزي + ماكنزي)',
+    category: 'livestudy',
     blocks: [
-      { start: '05:30', end: '06:15', icon: '🌅', title: 'محطة الفجر + فطور خفيف وترويق السرير', desc: 'استيقاظ 5:30 ص، صلاة الفجر في وقتها، أذكار الصباح، فطور سريع مغذي مع مشروبك وترويق السرير.', type: 'prayer', tag: '#فجر_وبداية' },
-      { start: '06:15', end: '12:15', icon: '💻', title: '[شفت 1] شغل عميق Coachdrift (6 ساعات كود صافي)', desc: 'قمة الطاقة الذهنية! 6 ساعات متصلة لإنهاء ميزات كوتش دريفت للـ Launch 10/10. ممنوع أي مشتتات.', type: 'deepwork', tag: '#Coachdrift_P0' },
-      { start: '12:15', end: '12:45', icon: '🍲', title: 'تجهيز وتسخين الغداء', desc: 'تجهيز وجبة غداء صحية مغذية والاستعداد لصلاة الظهر.', type: 'living', tag: '#تجهيز_الغداء' },
-      { start: '12:45', end: '13:15', icon: '🕌', title: 'صلاة الظهر في وقتها', desc: 'أداء صلاة الظهر في وقتها فور الأذان في المسجد أو في البيت.', type: 'prayer', tag: '#صلاة_الظهر' },
-      { start: '13:15', end: '13:45', icon: '🍽️', title: 'الغداء وغسيل المواعين فوراً (قاعدة Zero Dishes)', desc: 'تناول الغداء الصحي وتطبيق قاعدة الكفاءة: غسيل المواعين وتنظيف المطبخ فوراً.', type: 'living', tag: '#غداء_ومواعين' },
-      { start: '13:45', end: '14:15', icon: '😴', title: 'قيلولة الطاقة الحيوية (Power Nap 25 دقيقة)', desc: 'إعادة شحن بطارية الدماغ لتجديد التركيز للشفت الثاني (سنة نبوية مثبتة علمياً).', type: 'break', tag: '#استشفاء' },
-      { start: '14:15', end: '16:10', icon: '🎓', title: '[شفت 2] الكلية أونلاين والمذاكرة (ساعتين كاملتين)', desc: 'متابعة محاضرات الكلية الأونلاين بتركيز، حل التكليفات والشيتات وإنهاء متطلبات الكلية أول بأول.', type: 'college', tag: '#كلية_ومذاكرة' },
-      { start: '16:10', end: '16:40', icon: '🕌', title: 'صلاة العصر في وقتها', desc: 'أداء صلاة العصر في وقتها فور الأذان.', type: 'prayer', tag: '#صلاة_العصر' },
-      { start: '16:40', end: '17:15', icon: '🏋️‍♂️', title: 'متابعة الكوتشينج المركزة (35 دقيقة)', desc: 'الرد السريع على استفسارات المشتركين وتعديل البرامج ثم قفل الواتساب تماماً.', type: 'coaching', tag: '#كوتشينج' },
-      { start: '17:15', end: '18:45', icon: '📚', title: '[شفت 3] الكورسات والتعلم التقني (الجزء الأول)', desc: 'دراسة وتطبيق عملي على الكورسات، بناء مشاريع تقنية وتطوير المهارات.', type: 'courses', tag: '#كورسات' },
-      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في وقتها', desc: 'أداء صلاة المغرب فور أذان المغرب مع الغروب في وقتها.', type: 'prayer', tag: '#صلاة_المغرب' },
-      { start: '19:15', end: '20:05', icon: '💻', title: '[شفت 3] استكمال الكورسات والتطبيق العملي', desc: 'استكمال كود المشاريع التقنية والانتهاء من مهام التطوير اليومية.', type: 'courses', tag: '#تطبيق_تقني' },
-      { start: '20:05', end: '20:35', icon: '🕌', title: 'صلاة العشاء في وقتها', desc: 'أداء صلاة العشاء فور الأذان في المسجد جماعة.', type: 'prayer', tag: '#صلاة_العشاء' },
-      { start: '20:35', end: '21:00', icon: '📞', title: 'مكالمة الأهل اليومية + عشاء خفيف وغسيل المواعين', desc: 'مكالمة الوالدة والأسرة، تناول وجبة عشاء خفيفة وغسيل الأطباق فوراً.', type: 'living', tag: '#أهل_وعشاء' },
-      { start: '21:00', end: '21:30', icon: '🛑', title: 'ترويق البيت (20 د) + بروتوكول قفل الشاشات', desc: 'ترتيب المكان، Hard Stop للابتوب، إبعاد الموبايل، وضوء وقراءة أذكار النوم.', type: 'shutdown', tag: '#حماية_النوم' },
-      { start: '21:30', end: '05:30', icon: '💤', title: 'نوم هادئ وعميق (8 ساعات كاملة متصلة)', desc: 'نوم 8 ساعات كاملة في ظلام تام للاستيقاظ 5:30 ص بكامل طاقتك ونشاطك للفجر وشفت جديد.', type: 'sleep', tag: '#نوم_8_ساعات' }
+      { start: '05:30', end: '06:15', icon: '🌅', title: 'محطة الفجر + إفطار سريع وأذكار الصباح', desc: 'استيقاظ 5:30 ص، صلاة الفجر في وقتها بالمسجد، أذكار الصباح، فطور سريع مغذي وترويق السرير.', type: 'prayer', tag: '#فجر_وبداية' },
+      { start: '06:15', end: '07:00', icon: '🎥', title: 'تجهيز بث لايف Study With Me ومكان المذاكرة', desc: 'تجهيز الكاميرا والمايك، تشغيل عداد البومودورو، ضبط جلسة البث والبدء 7:00 ص بالضبط.', type: 'livestudy', tag: '#تجهيز_اللايف' },
+      { start: '07:00', end: '11:30', icon: '💻', title: '[بومودورو 1] كود عميق وبرمجة وبناء مشاريع مع AI', desc: 'قمة التركيز الذهني! 4.5 ساعات كود مكثف، بناء ميزات جديدة ومشاريع بورتفوليو وإدارة مهام Antigravity.', type: 'deepwork', tag: '#برمجة_عميقة' },
+      { start: '11:30', end: '12:45', icon: '🎨', title: '[بومودورو 2] مسار UI/UX (Courssat Plus: دروس وتأسيس)', desc: 'متابعة فيديوهات مسار الـ UI/UX على كورسات بلس، فهم أساسيات تجربة المستخدم ونظم التصميم.', type: 'courses', tag: '#تصميم_UI_UX' },
+      { start: '12:45', end: '13:30', icon: '🕌', title: 'صلاة الظهر في وقتها + سناك خفيف واستراحة العين', desc: 'أداء صلاة الظهر في وقتها فور الأذان، تناول سناك صحي، وإراحة العينين بعيداً عن الشاشات.', type: 'prayer', tag: '#صلاة_الظهر' },
+      { start: '13:30', end: '15:00', icon: '📐', title: '[بومودورو 2] تطبيق عملي ومشاريع وتصاميم على Figma', desc: 'تطبيق مباشر لكل ما تم تعلمه في كورس UI/UX وتصميم واجهات حقيقية على فيجما.', type: 'courses', tag: '#Figma_عملي' },
+      { start: '15:00', end: '16:15', icon: '🇬🇧', title: '[بومودورو 3] مسار الإنجليزي (Courssat Plus: استماع ومحادثة)', desc: 'تطوير مهارات الاستماع والمحادثة، تكرار الجمل، وتدوين الملاحظات التفاعلية في مسار الإنجليزي.', type: 'courses', tag: '#إنجليزي' },
+      { start: '16:15', end: '16:45', icon: '🕌', title: 'صلاة العصر في وقتها + فريش واستعادة نشاط', desc: 'صلاة العصر في وقتها فور الأذان بالمسجد، غسل الوجه واستعادة الحيوية للجزء الأخير من اللايف.', type: 'prayer', tag: '#صلاة_العصر' },
+      { start: '16:45', end: '17:30', icon: '🇬🇧', title: '[بومودورو 3] استكمال تمارين الإنجليزي والمفردات اليومية', desc: 'حل الاختبارات التفاعلية وتثبيت الكلمات الجديدة في مسار اللغة الإنجليزية.', type: 'courses', tag: '#تمارين_إنجليزي' },
+      { start: '17:30', end: '19:00', icon: '🚀', title: '[بومودورو 4] برنامج ماكنزي فورورد (McKinsey Forward وحدات وتقييمات)', desc: 'قراءة محتوى الوحدات التدريبية، إتمام التقييمات، وتطبيق أدوات حل المشكلات والتفكير القيادي.', type: 'courses', tag: '#McKinsey_Forward' },
+      { start: '19:00', end: '19:30', icon: '🛑', title: 'ختام لايف الـ 12 ساعة بنجاح + صلاة المغرب فور الأذان', desc: 'قفل البث المباشر مع المتابعين، الاحتفال بإنهاء 12 ساعة دراسة كاملة، وأداء صلاة المغرب.', type: 'prayer', tag: '#صلاة_المغرب' },
+      { start: '19:30', end: '20:30', icon: '🍲', title: 'عشاء مغذي + غسيل الأطباق ودش دافئ', desc: 'تناول وجبة عشاء بروتينية صحية، غسيل الأطباق فوراً (قاعدة Zero Dishes)، وأخذ دش مريح.', type: 'living', tag: '#عشاء_واستشفاء' },
+      { start: '20:30', end: '21:00', icon: '🕌', title: 'صلاة العشاء في وقتها جماعة بالمسجد', desc: 'الذهاب للمسجد وأداء صلاة العشاء جماعة في وقتها.', type: 'prayer', tag: '#صلاة_العشاء' },
+      { start: '21:00', end: '21:45', icon: '📱', title: 'مكالمة الأهل + مراجعة مخرجات الكود مع الـ AI', desc: 'مكالمة الأسرة والاطمئنان، وإلقاء نظرة سريعة على ما تم إنجازه في الكود مع AI.', type: 'living', tag: '#مكالمة_الأسرة' },
+      { start: '21:45', end: '22:30', icon: '🛑', title: 'بروتوكول حماية النوم وإبعاد الشاشات وأذكار النوم', desc: 'قفل الشاشات تماماً، وضوء وقراءة أذكار النوم والاستعداد لنوم عميق 10:30 م.', type: 'shutdown', tag: '#حماية_النوم' },
+      { start: '22:30', end: '05:30', icon: '💤', title: 'نوم عميق وهادئ (7 ساعات كاملة متصلة)', desc: 'نوم هادئ في ظلام تام للاستيقاظ 5:30 ص بنشاط واستعداد ليوم شيفت طلبات أو دراسة جديدة.', type: 'sleep', tag: '#نوم_7_ساعات' }
     ]
   },
-  saturday: {
-    id: 'saturday',
-    name: 'يوم السبت (يوم الكلية الطويل)',
-    badge: 'كلية 8-6 + كود فجري + نوم 8 ساعات',
-    category: 'saturday',
+  talabat_full: {
+    id: 'talabat_full',
+    name: 'يوم شيفت طلبات كامل (دخل مالي ونشاط حركي)',
+    badge: '🚴 شيفت 8ص-8م + متابعة كود الـ AI + نوم 7 ساعات',
+    category: 'talabat',
     blocks: [
-      { start: '05:30', end: '06:15', icon: '🌅', title: 'محطة الفجر + تحضير سناك الكلية والشنطة', desc: 'صلاة الفجر في وقتها، أذكار الصباح، تحضير وجبة خفيفة ومياه لليوم الطويل.', type: 'prayer', tag: '#فجر' },
-      { start: '06:15', end: '07:15', icon: '💻', title: 'شفت كود فجري مركز لكوتش دريفت (ساعة كاملة)', desc: 'تثبيت تقدم يومي في كوتش دريفت وحل تاسك برمجية قبل مغادرة المنزل.', type: 'deepwork', tag: '#Coachdrift_P0' },
-      { start: '07:15', end: '08:00', icon: '🚗', title: 'التحرك للكلية والوصول 8:00 ص', desc: 'الطريق للكلية، استماع لبودكاست أو مراجعة سريعة.', type: 'college', tag: '#مواصلات' },
-      { start: '08:00', end: '12:45', icon: '🎓', title: 'محاضرات وسكاشن الكلية الصباحية', desc: 'حضور وتركيز مع الدكاترة والمعيدين.', type: 'college', tag: '#محاضرات' },
-      { start: '12:45', end: '13:15', icon: '🕌', title: 'صلاة الظهر في مصلى الكلية + سناك خفيف', desc: 'أداء صلاة الظهر في مصلى الكلية وتناول سناك.', type: 'prayer', tag: '#صلاة_الظهر' },
-      { start: '13:15', end: '16:10', icon: '🎓', title: 'استكمال محاضرات وسكاشن الكلية', desc: 'الفترة الثانية من المحاضرات والسكاشن العملية.', type: 'college', tag: '#محاضرات' },
-      { start: '16:10', end: '16:40', icon: '🕌', title: 'صلاة العصر في مصلى الكلية', desc: 'أداء صلاة العصر في وقتها بمصلى الكلية.', type: 'prayer', tag: '#صلاة_العصر' },
-      { start: '16:40', end: '18:00', icon: '🎓', title: 'آخر سكشن/محاضرة ونهاية يوم الكلية', desc: 'إنهاء اليوم والمغادرة في تمام 6:00 مساءً.', type: 'college', tag: '#نهاية_اليوم' },
-      { start: '18:00', end: '18:45', icon: '🚗', title: 'العودة للمنزل فوراً', desc: 'الوصول للبيت قبل أذان المغرب.', type: 'college', tag: '#عودة' },
-      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في وقتها فور الوصول', desc: 'صلاة المغرب فور الأذان والعودة للمنزل.', type: 'prayer', tag: '#صلاة_المغرب' },
-      { start: '19:15', end: '20:05', icon: '🍲', title: 'دش دافئ + عشاء وغسيل الأواني + متابعة سريعة', desc: 'أخذ دش دافئ، عشاء صحي وغسيل المواعين + 20 دقيقة متابعة متدربين.', type: 'living', tag: '#أكل_ومواعين' },
-      { start: '20:05', end: '20:35', icon: '🕌', title: 'صلاة العشاء في وقتها', desc: 'صلاة العشاء في وقتها فور الأذان جماعة في المسجد.', type: 'prayer', tag: '#صلاة_العشاء' },
-      { start: '20:35', end: '21:00', icon: '📞', title: 'مكالمة الأهل اليومية والاطمئنان', desc: 'مكالمة الوالدة والأسرة والاطمئنان والترويح بعد يوم الكلية الطويل.', type: 'living', tag: '#مكالمة_الأهل' },
-      { start: '21:00', end: '21:30', icon: '🛑', title: 'ترويق سريع للشقة وقفل الشاشات والـ Wind-down', desc: 'ترتيب المكان، إبعاد الموبايل، وضوء وقراءة الأذكار.', type: 'shutdown', tag: '#حماية_النوم' },
-      { start: '21:30', end: '05:30', icon: '💤', title: 'نوم عميق ومريح (8 ساعات كاملة متصلة)', desc: 'نوم 8 ساعات كاملة لتعويض إجهاد السبت والاستعداد ليوم الأحد بنشاط خارق.', type: 'sleep', tag: '#نوم_8_ساعات' }
+      { start: '05:30', end: '06:45', icon: '🌅', title: 'الفجر في وقته + فطور طاقة وتجهيز عدة الشغل والباور بانك', desc: 'صلاة الفجر في المسجد، فطور مشبع غني بالطاقة، التأكد من شحن الهاتف والباور بانك، وتجهيز العجلة/السكوتر.', type: 'prayer', tag: '#فجر_وتجهيز' },
+      { start: '06:45', end: '07:45', icon: '💻', title: 'جلسة كود فجرية / توجيه Antigravity بمهام اليوم', desc: 'إطلاق مهام الكود للـ AI ليعمل في الخلفية، مراجعة سريعة قبل مغادرة المنزل.', type: 'deepwork', tag: '#توجيه_الـAI' },
+      { start: '07:45', end: '08:00', icon: '🚴', title: 'التحرك والوصول لمنطقة الشغل وفتح تطبيق طلبات', desc: 'الوصول لنقطة التمركز وبدء الشيفت في تمام 8:00 صباحاً.', type: 'talabat', tag: '#بدء_الشيفت' },
+      { start: '08:00', end: '12:45', icon: '🚴', title: '[فترة 1 طلبات] أوردرات الصباح والسوبرماركت', desc: 'تنفيذ طلبات الصباح وتوصيل سريع مع شرب الماء باستمرار ومراعاة قواعد الأمان.', type: 'talabat', tag: '#أوردرات_الصباح' },
+      { start: '12:45', end: '13:30', icon: '🕌', title: 'صلاة الظهر في المسجد + وجبة غداء خفيفة ومياه', desc: 'إيقاف مؤقت للطلبات، صلاة الظهر في أقرب مسجد، وتناول سناك صحي مع زجاجة مياه.', type: 'prayer', tag: '#صلاة_الظهر' },
+      { start: '13:30', end: '16:15', icon: '🚴', title: '[فترة 2 طلبات] ذروة الغداء (Lunch Peak) وأعلى دخل', desc: 'استغلال ساعات الذروة لمطاعم الغداء وتحقيق أعلى معدل أوردرات وبونص.', type: 'talabat', tag: '#ذروة_الغداء' },
+      { start: '16:15', end: '16:45', icon: '🕌', title: 'صلاة العصر في المسجد + تشييك سريع على الكود من الموبايل', desc: 'صلاة العصر في المسجد، إلقاء نظرة سريعة على كود الـ AI وإرسال تعليق لو لزم.', type: 'prayer', tag: '#صلاة_العصر' },
+      { start: '16:45', end: '18:45', icon: '🚴', title: '[فترة 3 طلبات] أوردرات ما قبل الغروب وبداية المساء', desc: 'استكمال الأوردرات بكفاءة وسرعة لتأمين الهدف المالي لليوم.', type: 'talabat', tag: '#أوردرات_المساء' },
+      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في المسجد فور الأذان', desc: 'صلاة المغرب فور سماع الأذان في المسجد والراحة 15 دقيقة.', type: 'prayer', tag: '#صلاة_المغرب' },
+      { start: '19:15', end: '20:00', icon: '🚴', title: 'نهاية شيفت طلبات وقفل التطبيق والعودة للمنزل', desc: 'تسليم آخر أوردر، قفل التطبيق بإنهاء 12 ساعة عمل، والعودة للبيت بأمان.', type: 'talabat', tag: '#ختام_الشيفت' },
+      { start: '20:00', end: '20:45', icon: '🍲', title: 'دش دافئ + عشاء منزلي واسترجاع الطاقة', desc: 'أخذ دش دافئ منعش بعد مشقة اليوم، عشاء بيتي ساخن ومغذي، وغسيل المواعين.', type: 'living', tag: '#راحة_وعشاء' },
+      { start: '20:45', end: '21:15', icon: '🕌', title: 'صلاة العشاء جماعة في المسجد', desc: 'أداء صلاة العشاء بالمسجد مع ختام اليوم.', type: 'prayer', tag: '#صلاة_العشاء' },
+      { start: '21:15', end: '22:00', icon: '💻', title: 'مراجعة مخرجات الكود مع Antigravity + مكالمة الأهل', desc: 'فتح اللابتوب وفحص ما تم إنجازه أثناء النهار، دمج التعديلات، ومكالمة الوالدة والأسرة.', type: 'deepwork', tag: '#مراجعة_الكود' },
+      { start: '22:00', end: '22:30', icon: '🛑', title: 'بروتوكول قفل الشاشات والـ Wind-down', desc: 'ترتيب المكان، Hard Stop، إبعاد الموبايل، وضوء وأذكار النوم.', type: 'shutdown', tag: '#حماية_النوم' },
+      { start: '22:30', end: '05:30', icon: '💤', title: 'نوم عميق (7 ساعات كاملة لاستعادة النشاط البدني)', desc: 'نوم هادئ ومريح 7 ساعات كاملة لاستشفاء العضلات والنشاط الصباحي.', type: 'sleep', tag: '#نوم_7_ساعات' }
     ]
   },
   wednesday: {
     id: 'wednesday',
-    name: 'يوم الأربعاء (نصف يوم كلية + شفتات عمل)',
-    badge: 'كلية 8-2 + كود دريفت + نوم 8 ساعات',
+    name: 'يوم الأربعاء (كلية عملي + تصوير ومونتاج شورتس)',
+    badge: '🎓 كلية 8-2 + 🎬 مونتاج وتصوير شورتس 3:30-7:30م',
     category: 'wednesday',
     blocks: [
-      { start: '05:30', end: '06:15', icon: '🌅', title: 'محطة الفجر + فطور وتجهيز النزول', desc: 'صلاة الفجر في وقتها، فطور مغذي سريع وترويق السرير.', type: 'prayer', tag: '#فجر' },
-      { start: '06:15', end: '07:15', icon: '💻', title: 'جلسة كود فجرية لكوتش دريفت (ساعة كاملة)', desc: 'إنجاز تسليمة كود قبل النزول للكلية.', type: 'deepwork', tag: '#Coachdrift_P0' },
-      { start: '07:15', end: '08:00', icon: '🚗', title: 'التحرك للكلية والوصول 8:00 ص', desc: 'الوصول مبكراً وحضور المحاضرات.', type: 'college', tag: '#مواصلات' },
-      { start: '08:00', end: '12:45', icon: '🎓', title: 'محاضرات وسكاشن الكلية', desc: 'التركيز مع المحاضرات الأساسية.', type: 'college', tag: '#محاضرات' },
-      { start: '12:45', end: '13:15', icon: '🕌', title: 'صلاة الظهر في مصلى الكلية', desc: 'صلاة الظهر في المصلى في وقتها.', type: 'prayer', tag: '#صلاة_الظهر' },
-      { start: '13:15', end: '14:00', icon: '🎓', title: 'إنهاء محاضرات الأربعاء والتحرك للمنزل', desc: 'الخروج 2:00 ظهراً والعودة للبيت.', type: 'college', tag: '#عودة' },
-      { start: '14:30', end: '15:30', icon: '🍲', title: 'غداء + غسيل مواعين + قيلولة 20 دقيقة', desc: 'تناول الغداء، غسيل الأطباق فوراً، وقيلولة شحن طاقة سريعة.', type: 'living', tag: '#غداء_وقيلولة' },
-      { start: '15:30', end: '16:10', icon: '🏋️‍♂️', title: 'متابعة الكوتشينج وتعديل الجداول (40 د)', desc: 'إنهاء شات واستفسارات المشتركين وقفل الواتساب.', type: 'coaching', tag: '#كوتشينج' },
-      { start: '16:10', end: '16:40', icon: '🕌', title: 'صلاة العصر في وقتها', desc: 'صلاة العصر في وقتها فور الأذان.', type: 'prayer', tag: '#صلاة_العصر' },
-      { start: '16:40', end: '18:45', icon: '💻', title: '[شفت Coachdrift مسائي قوي] (ساعتان كود صافية)', desc: 'تعويض ساعات الكلية بتركيز ناري على كوتش دريفت قبل اللانش.', type: 'deepwork', tag: '#Coachdrift_P0' },
-      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في وقتها', desc: 'صلاة المغرب فور الأذان في وقتها.', type: 'prayer', tag: '#صلاة_المغرب' },
-      { start: '19:15', end: '20:05', icon: '📚', title: 'شفت الكورسات والتطوير التقني (50 دقيقة)', desc: 'متابعة درس أو كورس تقني وتطبيقه عملياً.', type: 'courses', tag: '#كورسات' },
-      { start: '20:05', end: '20:35', icon: '🕌', title: 'صلاة العشاء في وقتها', desc: 'صلاة العشاء جماعة فور الأذان.', type: 'prayer', tag: '#صلاة_العشاء' },
-      { start: '20:35', end: '21:00', icon: '📞', title: 'مكالمة الأهل + عشاء خفيف', desc: 'مكالمة الأسرة وتناول عشاء خفيف وغسيل المواعين.', type: 'living', tag: '#أهل_وعشاء' },
-      { start: '21:00', end: '21:30', icon: '🛑', title: 'ترويق سريع للشقة وقفل الشاشات', desc: 'ترتيب المكان، Hard Stop، وضوء ونوم 9:30 م.', type: 'shutdown', tag: '#حماية_النوم' },
-      { start: '21:30', end: '05:30', icon: '💤', title: 'نوم هادئ وعميق (8 ساعات كاملة متصلة)', desc: 'نوم 8 ساعات كاملة في ظلام تام للاستيقاظ 5:30 ص بنشاط.', type: 'sleep', tag: '#نوم_8_ساعات' }
+      { start: '05:30', end: '06:30', icon: '🌅', title: 'الفجر في وقته + فطور وتجهيز أدوات المعمل والكلية', desc: 'صلاة الفجر في المسجد، فطور مغذي، مراجعة متطلبات السكاشن العملية وتجهيز النزول.', type: 'prayer', tag: '#فجر_واستعداد' },
+      { start: '06:30', end: '07:15', icon: '💻', title: 'شفت كود فجري مركز / مراجعة برمجية سريعة', desc: 'جلسة تركيز 45 دقيقة لإنجاز مهمة كود قبل الانطلاق.', type: 'deepwork', tag: '#كود_فجري' },
+      { start: '07:15', end: '08:00', icon: '🚗', title: 'التحرك للكلية والوصول 8:00 ص', desc: 'المواصلات للكلية، استماع لبودكاست مفيد والوصول قبل موعد السكشن.', type: 'college', tag: '#مواصلات' },
+      { start: '08:00', end: '12:45', icon: '🎓', title: 'سكاشن ومعامل الكلية العملية بتركيز', desc: 'حضور المعامل والسكاشن العملية والتفاعل مع التطبيقات المطلوبة.', type: 'college', tag: '#كلية_عملي' },
+      { start: '12:45', end: '13:15', icon: '🕌', title: 'صلاة الظهر في مصلى الكلية', desc: 'أداء صلاة الظهر في مصلى الكلية في وقتها.', type: 'prayer', tag: '#صلاة_الظهر' },
+      { start: '13:15', end: '14:00', icon: '🎓', title: 'إنهاء اليوم العملي والمغادرة للمنزل 2:00 ظهراً', desc: 'الخروج من الكلية والعودة للبيت فوراً.', type: 'college', tag: '#مغادرة_الكلية' },
+      { start: '14:30', end: '15:30', icon: '🍲', title: 'غداء منزلي + قيلولة شحن الطاقة (Power Nap 20 دقيقة)', desc: 'تناول الغداء الصحي، غسيل الأواني، وأخذ قيلولة 20 دقيقة لاسترجاع النشاط الذهني.', type: 'living', tag: '#غداء_وقيلولة' },
+      { start: '15:30', end: '16:15', icon: '🎬', title: '[جلسة صناعة المحتوى] إعداد سكريبتات الشورتس والإضاءة والمايك', desc: 'تجهيز أفكار 2 إلى 3 شورتس، صياغة الهوكس (Hooks) القوية وتجهيز كادر التصوير.', type: 'content', tag: '#سكريبت_الشورتس' },
+      { start: '16:15', end: '16:45', icon: '🕌', title: 'صلاة العصر في وقتها', desc: 'أداء صلاة العصر في وقتها فور الأذان.', type: 'prayer', tag: '#صلاة_العصر' },
+      { start: '16:45', end: '18:00', icon: '🎥', title: '[جلسة صناعة المحتوى] تصوير دفعة الفيديوهات كاملة (Batch Recording)', desc: 'تسجيل الشورتس دفعة واحدة أمام الكاميرا بأعلى حيوية وطاقة.', type: 'content', tag: '#تصوير_شورتس' },
+      { start: '18:00', end: '18:45', icon: '✂️', title: '[جلسة صناعة المحتوى] مونتاج وتقطيع الشورتس والـ Captions', desc: 'تقطيع الصمت، إضافة التكبيرات (Zooms)، كتابة السبتايتل وإخراج الفيديو بجودة عالية.', type: 'content', tag: '#مونتاج_الشورتس' },
+      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب فور الأذان', desc: 'أداء صلاة المغرب في وقتها.', type: 'prayer', tag: '#صلاة_المغرب' },
+      { start: '19:15', end: '20:05', icon: '📤', title: 'جدولة ونشر الفيديوهات وتجهيز الغلاف والـ Hooks', desc: 'رفع الفيديوهات وجدولتها على المنصات وكتابة الكابشن والدعوة للفعل (CTA).', type: 'content', tag: '#نشر_المحتوى' },
+      { start: '20:05', end: '20:35', icon: '🕌', title: 'صلاة العشاء في وقتها بالمسجد', desc: 'أداء صلاة العشاء بالمسجد جماعة فور الأذان.', type: 'prayer', tag: '#صلاة_العشاء' },
+      { start: '20:35', end: '21:15', icon: '📞', title: 'مكالمة الأهل + عشاء خفيف وغسيل المواعين', desc: 'مكالمة الوالدة والعائلة وتناول عشاء خفيف.', type: 'living', tag: '#أهل_وعشاء' },
+      { start: '21:15', end: '22:00', icon: '💻', title: 'ترويح حر أو مراجعة سريعة للكود', desc: 'جلسة مرنة بدون ضغط لمراجعة كود أو تصفح تقني مفيد.', type: 'deepwork', tag: '#مراجعة_حرة' },
+      { start: '22:00', end: '22:30', icon: '🛑', title: 'قفل الشاشات والتهيئة للنوم', desc: 'ترتيب المكان، قفل الأجهزة، وضوء واستعداد للنوم 10:30 م.', type: 'shutdown', tag: '#حماية_النوم' },
+      { start: '22:30', end: '05:30', icon: '💤', title: 'نوم هادئ وعميق 7 ساعات', desc: 'نوم 7 ساعات كاملة للاستعداد لشيفت طلبات الخميس بكل نشاط.', type: 'sleep', tag: '#نوم_7_ساعات' }
+    ]
+  },
+  saturday_college: {
+    id: 'saturday_college',
+    name: 'السبت أسبوع (أ) (كلية نظري + طلبات مسائي)',
+    badge: '🎓 كلية نظري 8ص-4م + 🚴 طلبات مسائي 4:30م-8:30م',
+    category: 'saturday_college',
+    blocks: [
+      { start: '05:30', end: '06:45', icon: '🌅', title: 'الفجر في وقته + فطور وتجهيز شنطة الكلية ولبس الشيفت', desc: 'صلاة الفجر في المسجد، فطور سريع مغذي، تجهيز كشكول المحاضرات وشنطة الشغل.', type: 'prayer', tag: '#فجر_واستعداد' },
+      { start: '06:45', end: '07:45', icon: '🚗', title: 'التحرك والوصول للكلية 8:00 ص', desc: 'المواصلات للكلية والوصول مبكراً قبل بدء المحاضرات.', type: 'college', tag: '#مواصلات' },
+      { start: '08:00', end: '12:45', icon: '🎓', title: 'محاضرات الكلية النظرية الصباحية', desc: 'حضور وتدوين الملاحظات الأساسية مع أساتذة المواد النظرية.', type: 'college', tag: '#محاضرات_نظري' },
+      { start: '12:45', end: '13:15', icon: '🕌', title: 'صلاة الظهر بمصلى الكلية + سناك سريع', desc: 'أداء صلاة الظهر في المصلى وتناول سناك مياه وبسكوت.', type: 'prayer', tag: '#صلاة_الظهر' },
+      { start: '13:15', end: '16:00', icon: '🎓', title: 'استكمال محاضرات النظري ونهاية اليوم الدراسي 4:00 م', desc: 'الفترة الثانية من المحاضرات، إنهاء اليوم عند 4:00 عصراً.', type: 'college', tag: '#محاضرات' },
+      { start: '16:00', end: '16:30', icon: '🕌', title: 'صلاة العصر في المسجد + بدء فتح أبلكيشن طلبات', desc: 'أداء صلاة العصر، التبديل للباقة والشيفت وتشغيل التطبيق في الزون.', type: 'prayer', tag: '#صلاة_العصر' },
+      { start: '16:30', end: '18:45', icon: '🚴', title: '[شيفت طلبات مسائي] أوردرات ما بعد الكلية النظري', desc: 'شيفت 4 ساعات مركز للاستفادة من ذروة المساء بدون إرهاق بدني كبير.', type: 'talabat', tag: '#طلبات_مسائي' },
+      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في المسجد فور الأذان', desc: 'صلاة المغرب فور الأذان في المسجد.', type: 'prayer', tag: '#صلاة_المغرب' },
+      { start: '19:15', end: '20:30', icon: '🚴', title: 'ختام شيفت السبت والعودة للمنزل', desc: 'تسليم آخر الأوردرات، قفل التطبيق والعودة للبيت.', type: 'talabat', tag: '#ختام_الشيفت' },
+      { start: '20:30', end: '21:00', icon: '🕌', title: 'صلاة العشاء في وقتها', desc: 'أداء صلاة العشاء جماعة في المسجد.', type: 'prayer', tag: '#صلاة_العشاء' },
+      { start: '21:00', end: '21:45', icon: '🍲', title: 'دش دافئ + عشاء منزلي واسترجاع النشاط', desc: 'دش دافئ للتخلص من تعب اليوم، عشاء صحي ومغذي وغسيل المواعين.', type: 'living', tag: '#عشاء_وراحة' },
+      { start: '21:45', end: '22:30', icon: '🛑', title: 'مراجعة سريعة للكود + أذكار النوم وقفل الشاشات', desc: 'تجهيز اللابتوب للايف بكرة الأحد 7:00 ص، قفل الشاشات، وضوء ونوم.', type: 'shutdown', tag: '#حماية_النوم' },
+      { start: '22:30', end: '05:30', icon: '💤', title: 'نوم عميق 7 ساعات استعداداً للايف الأحد 7ص', desc: 'نوم عميق وكافي لتكون في قمة طاقتك للايف الـ 12 ساعة غداً.', type: 'sleep', tag: '#نوم_7_ساعات' }
     ]
   },
   friday: {
     id: 'friday',
-    name: 'يوم الجمعة (محتوى + شؤون البيت + شحن طاقة)',
-    badge: 'تصوير مجمع + نظافة البيت + نوم 8 ساعات',
+    name: 'يوم الجمعة (روحانيات وعائلة + طلبات مسائي)',
+    badge: '🕌 صلاة الجمعة وسورة الكهف + 🚴 طلبات بعد العصر لـ 8م',
     category: 'friday',
     blocks: [
-      { start: '05:30', end: '06:30', icon: '🌅', title: 'محطة الفجر + سورة الكهف والورد', desc: 'صلاة الفجر في وقتها، قراءة سورة الكهف والأذكار والدعاء.', type: 'prayer', tag: '#روحانيات' },
-      { start: '06:30', end: '08:30', icon: '📝', title: 'جلسة كتابة سكريبتات المحتوى الأسبوعي', desc: 'كتابة سكريبتات لـ 2 إلى 3 فيديوهات من سلسلتي (إزاي تمرن نفسك + إزاي تعمل دايت لنفسك).', type: 'content', tag: '#كتابة_محتوى' },
-      { start: '08:30', end: '10:30', icon: '🧹', title: 'شؤون البيت الأسبوعية (Deep Clean & Laundry)', desc: 'غسيل الملابس، تنظيف شامل للمطبخ والشقة، وتجهيز أساسيات الأكل للأسبوع (Meal Prep).', type: 'living', tag: '#نظافة_البيت' },
-      { start: '10:30', end: '11:30', icon: '🚿', title: 'غسل الجمعة ولبس ملابس نظيفة', desc: 'أخذ شاور والاستعداد لصلاة الجمعة.', type: 'break', tag: '#استعداد_الجمعة' },
-      { start: '11:30', end: '13:30', icon: '🕌', title: 'صلاة الجمعة وسماع الخطبة والدعاء', desc: 'الذهاب للمسجد مبكراً وسماع الخطبة وأداء الصلاة.', type: 'prayer', tag: '#صلاة_الجمعة' },
-      { start: '13:30', end: '14:30', icon: '🍲', title: 'وجبة الجمعة الخاصة + راحة وغسيل الأواني', desc: 'تناول وجبة غداء مميزة وغسيل الأواني فوراً.', type: 'living', tag: '#غداء_الجمعة' },
-      { start: '14:30', end: '16:10', icon: '🎬', title: 'جلسة التصوير المجمعة (Batch Recording)', desc: 'تجهيز الكاميرا والمايك وتسجيل الفيديوهات دفعة واحدة ثم إرسالها للبايبلاين.', type: 'content', tag: '#تصوير_محتوى' },
-      { start: '16:10', end: '16:40', icon: '🕌', title: 'صلاة العصر في وقتها', desc: 'أداء صلاة العصر في وقتها.', type: 'prayer', tag: '#صلاة_العصر' },
-      { start: '16:40', end: '18:45', icon: '🛒', title: 'مشوار السوبرماركت الأسبوعي + ساعة إجابة الجمعة', desc: 'شراء بروتين وخضار ومستلزمات البيت للأسبوع في مشوار واحد منظم، مع دعاء ساعة الاستجابة.', type: 'living', tag: '#سوبرماركت_الأسبوع' },
-      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في وقتها', desc: 'صلاة المغرب فور الأذان في وقتها.', type: 'prayer', tag: '#صلاة_المغرب' },
-      { start: '19:15', end: '20:05', icon: '☕', title: 'كورس استكشافي / مشروع حر / ترويح مع أصحاب', desc: 'وقت مرن: كورس جديد، أو جلسة قهوة مع أصحاب بدون ضغط.', type: 'courses', tag: '#ترويح_وكورسات' },
-      { start: '20:05', end: '20:35', icon: '🕌', title: 'صلاة العشاء في وقتها', desc: 'صلاة العشاء في وقتها فور الأذان جماعة.', type: 'prayer', tag: '#صلاة_العشاء' },
-      { start: '20:35', end: '21:00', icon: '📞', title: 'مكالمة الأهل + عشاء خفيف', desc: 'مكالمة العائلة وعشاء خفيف وغسيل المواعين.', type: 'living', tag: '#مكالمة_الأهل' },
-      { start: '21:00', end: '21:30', icon: '🛑', title: 'بروتوكول حماية النوم وقفل الشاشات', desc: 'ترتيب المكان والاستعداد للنوم 9:30 م لبداية أسبوع ناري.', type: 'shutdown', tag: '#حماية_النوم' },
-      { start: '21:30', end: '05:30', icon: '💤', title: 'نوم هادئ وعميق (8 ساعات كاملة متصلة)', desc: 'نوم 8 ساعات كاملة للاستيقاظ 5:30 ص بأعلى طاقة.', type: 'sleep', tag: '#نوم_8_ساعات' }
+      { start: '05:30', end: '07:00', icon: '🌅', title: 'الفجر في وقته + قراءة سورة الكهف والأذكار والدعاء', desc: 'صلاة الفجر، قراءة سورة الكهف بتدبر، أذكار الصباح والدعاء المبارك.', type: 'prayer', tag: '#سورة_الكهف' },
+      { start: '07:00', end: '09:30', icon: '🧹', title: 'نظافة البيت وترتيب الملابس وتجهيز أكل الأسبوع', desc: 'غسيل الملابس، تنظيف شامل للمطبخ، وترتيب البيت استعداداً للأسبوع.', type: 'living', tag: '#ترتيب_البيت' },
+      { start: '09:30', end: '11:00', icon: '💻', title: 'جلسة استكشاف وتطوير برمجيات خفيفة', desc: 'قراءة تقنية، كود خفيف، أو تجربة مكتبة برمجية جديدة بدون ضغط.', type: 'deepwork', tag: '#تطوير_ذاتي' },
+      { start: '11:00', end: '13:30', icon: '🕌', title: 'غُسل الجمعة والذهاب للمسجد مبكراً وسماع الخطبة', desc: 'الغسل والتطيب ولبس أحسن الثياب والذهاب للمسجد في وقت مبكر وأداء الصلاة.', type: 'prayer', tag: '#صلاة_الجمعة' },
+      { start: '13:30', end: '15:30', icon: '🍲', title: 'وجبة الجمعة العائلية + راحة وجلسة شاي', desc: 'تناول الغداء مع الأسرة والترويح وقضاء وقت اجتماعي دافئ.', type: 'living', tag: '#غداء_الجمعة' },
+      { start: '15:30', end: '16:00', icon: '🕌', title: 'صلاة العصر في المسجد + دعاء ساعة الاستجابة', desc: 'أداء صلاة العصر، التضرع بالدعاء في ساعة الاستجابة قبل الغروب.', type: 'prayer', tag: '#صلاة_العصر' },
+      { start: '16:00', end: '18:45', icon: '🚴', title: '[شيفت طلبات مسائي] أوردرات العصر والغروب', desc: 'شيفت خفيف ومربح مع نشاط الجمعة المسائي.', type: 'talabat', tag: '#طلبات_الجمعة' },
+      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب في وقتها', desc: 'أداء صلاة المغرب فور الأذان في المسجد.', type: 'prayer', tag: '#صلاة_المغرب' },
+      { start: '19:15', end: '20:30', icon: '🚴', title: 'استكمال شيفت طلبات ختام الأسبوع', desc: 'إنهاء آخر طلبات اليوم وقفل التطبيق في تمام 8:30 م.', type: 'talabat', tag: '#أوردرات_المساء' },
+      { start: '20:30', end: '21:00', icon: '🕌', title: 'صلاة العشاء في وقتها', desc: 'أداء صلاة العشاء بالمسجد جماعة.', type: 'prayer', tag: '#صلاة_العشاء' },
+      { start: '21:00', end: '22:00', icon: '🍲', title: 'عشاء خفيف ومكالمة الأهل والأصدقاء', desc: 'تناول عشاء خفيف، جلسة دردشة وترويح نفسي.', type: 'living', tag: '#أهل_وأصحاب' },
+      { start: '22:00', end: '22:30', icon: '🛑', title: 'حماية النوم والاستعداد لبداية الأسبوع', desc: 'قفل الشاشات والتهيئة لنوم هادئ 10:30 م لبدء الأسبوع الجديد بنشاط.', type: 'shutdown', tag: '#حماية_النوم' },
+      { start: '22:30', end: '05:30', icon: '💤', title: 'نوم هادئ 7 ساعات', desc: 'نوم 7 ساعات كاملة للاستيقاظ 5:30 ص في أفضل لياقة وتركيز.', type: 'sleep', tag: '#نوم_7_ساعات' }
     ]
   }
 };
@@ -132,20 +153,20 @@ const INITIAL_CONTENT_IDEAS = [
   }
 ];
 
-// Initial Habits List (Updated with 8h sleep & Separate Prayers)
+// Initial Habits List (Updated for Live Stream, Talabat, 4 Tracks, College & Content)
 const DEFAULT_HABITS = [
-  { id: 'h1', text: 'صلاة الفجر في وقتها وأذكار الصباح (5:30 ص)', tag: '05:30 ص' },
-  { id: 'h2', text: '[شفت 1] 6 ساعات كود لـ Coachdrift بدون أي مشتتات', tag: 'Coachdrift' },
-  { id: 'h3', text: 'صلاة الظهر في وقتها + غداء وغسيل المواعين فوراً', tag: 'ظهر_ومطبخ' },
-  { id: 'h4', text: 'قيلولة الطاقة الحيوية (Power Nap 20-25 دقيقة)', tag: '01:45 م' },
-  { id: 'h5', text: '[شفت 2] الكلية أونلاين والمذاكرة والتكليفات (ساعتين)', tag: 'كلية' },
-  { id: 'h6', text: 'صلاة العصر في وقتها + متابعة المتدربين (35 د)', tag: 'عصر_وكوتشينج' },
-  { id: 'h7', text: '[شفت 3] الكورسات والتعلم التقني والتطبيق العملي', tag: 'كورسات' },
-  { id: 'h8', text: 'صلاة المغرب في وقتها فور أذان الغروب', tag: 'مغرب' },
-  { id: 'h9', text: 'صلاة العشاء في وقتها فور الأذان جماعة في المسجد', tag: 'عشاء' },
+  { id: 'h1', text: 'صلاة الفجر في وقتها وأذكار الصباح في المسجد (5:30 ص)', tag: 'فجر_ومسجد' },
+  { id: 'h2', text: 'الالتزام الكامل بجدول اليوم (لايف 12س / شيفت طلبات / كلية)', tag: 'التزام_اليوم' },
+  { id: 'h3', text: 'صلاة الظهر في وقتها + سناك صحي ومياه', tag: 'صلاة_الظهر' },
+  { id: 'h4', text: 'قيلولة الطاقة السريعة في أيام البيت/الأربعاء (20 دقيقة)', tag: 'استشفاء' },
+  { id: 'h5', text: 'جلسة البرمجة وتطوير الكود وتوجيه Antigravity', tag: 'برمجة_وكود' },
+  { id: 'h6', text: 'صلاة العصر في وقتها فور سماع الأذان', tag: 'صلاة_العصر' },
+  { id: 'h7', text: 'إنجاز درس أو وحدة في مسارات التعلم (إنجليزي / UI-UX / ماكنزي)', tag: 'مسارات_تعلم' },
+  { id: 'h8', text: 'صلاة المغرب في وقتها فور الأذان', tag: 'صلاة_المغرب' },
+  { id: 'h9', text: 'صلاة العشاء جماعة بالمسجد في وقتها', tag: 'صلاة_العشاء' },
   { id: 'h10', text: 'شرب 3 لتر ماء على مدار اليوم (8 أكواب كاملة)', tag: 'صحة' },
-  { id: 'h11', text: 'ترويق البيت ومكالمة الأهل اليومية (8:35 م)', tag: 'أهل_ونظافة' },
-  { id: 'h12', text: 'Hard Stop ونوم 8 ساعات كاملة متصلة (9:30 م - 5:30 ص)', tag: 'نوم_8_ساعات' }
+  { id: 'h11', text: 'مكالمة الأهل وترويق الشقة وغسيل المواعين (Zero Dishes)', tag: 'أهل_وبيت' },
+  { id: 'h12', text: 'Hard Stop وقفل الشاشات ونوم 7 ساعات (10:30 م - 5:30 ص)', tag: 'حماية_النوم' }
 ];
 
 // Initial Living Alone Scratchpad Seed
@@ -159,18 +180,20 @@ const INITIAL_SCRATCHPAD = {
     { id: 'g6', text: 'صابون أطباق ومسحوق غسالة', done: false }
   ],
   ideas: [
-    { id: 'i1', text: 'Coachdrift: مراجعة RLS Policies لبيانات المشتركين', done: false },
-    { id: 'i2', text: 'فكرة ريلز: إزاي تلتزم بالدايت لو عايش لوحدك ومضغوط', done: false },
-    { id: 'i3', text: 'كورس الـ Backend: تطبيق عملي على Caching و Redis', done: true }
+    { id: 'i1', text: 'فكـرة شورتس: إزاي تذاكر 12 ساعة في لايف وتشتغل طلبات', done: false },
+    { id: 'i2', text: 'مشروع UI/UX: تصميم شاشات تطبيق موبايل على Figma', done: false },
+    { id: 'i3', text: 'ماكنزي فورورد: إتمام تقييم الوحدة الحالية قبل موعد التسليم', done: false },
+    { id: 'i4', text: 'برمجة: مراجعة كود Antigravity وإضافة ميزات جديدة', done: true }
   ],
   urgent: [
-    { id: 'u1', text: 'تجديد باقة النت المنزلي قبل انتهاء الميعاد', done: false },
-    { id: 'u2', text: 'تسليم شيت الكلية لمادة النظم العملية', done: false }
+    { id: 'u1', text: 'شحن الباور بانك وفحص العجلة/السكوتر لشيفت طلبات', done: false },
+    { id: 'u2', text: 'تسليم تكليف معمل الكلية العملي ليوم الأربعاء', done: false }
   ]
 };
 
 // State Management
-let currentSelectedDayType = 'auto'; // 'auto' | 'home' | 'saturday' | 'wednesday' | 'friday'
+let currentSelectedDayType = 'auto'; // 'auto' | 'live_study' | 'talabat_full' | 'wednesday' | 'saturday_college' | 'friday'
+let currentWeekCycle = localStorage.getItem('nooreldean_week_cycle') || 'week_a'; // 'week_a' | 'week_b'
 let currentFilter = 'all';
 let currentSeriesTab = 'workout';
 let deferredInstallPrompt = null;
@@ -189,13 +212,12 @@ const activeBlockIconEl = document.getElementById('activeBlockIcon');
 const activeBlockRemainingEl = document.getElementById('activeBlockRemaining');
 const nextBlockTextEl = document.getElementById('nextBlockText');
 
-const cdDaysEl = document.getElementById('cdDays');
-const cdHoursEl = document.getElementById('cdHours');
-const cdMinutesEl = document.getElementById('cdMinutes');
-const cdSecondsEl = document.getElementById('cdSeconds');
-const sprintProgressFillEl = document.getElementById('sprintProgressFill');
-const sprintPercentEl = document.getElementById('sprintPercent');
-const sprintPhaseEl = document.getElementById('sprintPhase');
+// Learning Paths & Week Cycle DOM Elements
+const pathsTodayFocusEl = document.getElementById('pathsTodayFocus');
+const btnCycleWeekA = document.getElementById('btnCycleWeekA');
+const btnCycleWeekB = document.getElementById('btnCycleWeekB');
+const cycleDescText = document.getElementById('cycleDescText');
+const btnFocusCodeSession = document.getElementById('btnFocusCodeSession');
 
 const timelineListEl = document.getElementById('timelineList');
 const timelineTitleEl = document.getElementById('timelineTitle');
@@ -255,12 +277,19 @@ const countUrgentEl = document.getElementById('countUrgent');
 const clearCompletedScratchBtn = document.getElementById('clearCompletedScratchBtn');
 
 // Helpers: Time Parsing & Current Day Detection
+// Helpers: Time Parsing & Current Day Detection
 function getTodayDayScheduleKey() {
   const dayIndex = new Date().getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-  if (dayIndex === 6) return 'saturday';
-  if (dayIndex === 3) return 'wednesday';
-  if (dayIndex === 5) return 'friday';
-  return 'home'; // Sun, Mon, Tue, Thu
+  const cycle = localStorage.getItem('nooreldean_week_cycle') || 'week_a';
+
+  if (dayIndex === 0 || dayIndex === 2) return 'live_study'; // Sun, Tue (Live Study With Me 7am-7pm)
+  if (dayIndex === 1 || dayIndex === 4) return 'talabat_full'; // Mon, Thu (Talabat Shift 8am-8pm)
+  if (dayIndex === 3) return 'wednesday'; // Wed (College + Shorts Content)
+  if (dayIndex === 5) return 'friday'; // Fri (Family + Talabat Evening)
+  if (dayIndex === 6) { // Sat
+    return cycle === 'week_a' ? 'saturday_college' : 'talabat_full';
+  }
+  return 'live_study';
 }
 
 function getArabicDayName(dayIndex) {
@@ -304,62 +333,87 @@ function updateClock() {
   const dayIndex = now.getDay();
   const dayName = getArabicDayName(dayIndex);
   const scheduleKey = getTodayDayScheduleKey();
-  const schedName = SCHEDULES[scheduleKey].name;
+  const sched = SCHEDULES[scheduleKey];
 
-  currentDayBadgeEl.textContent = `اليوم: ${dayName} (${scheduleKey === 'home' ? 'يوم بيت' : scheduleKey === 'saturday' ? 'كلية كاملة' : scheduleKey === 'wednesday' ? 'نصف كلية' : 'جمعة ومحتوى'})`;
+  currentDayBadgeEl.textContent = `اليوم: ${dayName} (${sched.name})`;
   currentDateStrEl.textContent = now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
   autoTabPillEl.textContent = dayName;
 
-  // Auto trigger check for shutdown mode after 22:00
-  if (now.getHours() >= 22 && !sessionStorage.getItem('zenDismissedTonight')) {
+  // Auto trigger check for shutdown mode after 22:30
+  if (now.getHours() >= 22 && now.getMinutes() >= 30 && !sessionStorage.getItem('zenDismissedTonight')) {
     // Soft reminder can be used
   }
 }
 
-// Update Coachdrift 10/10 Launch Countdown
-function updateSprintCountdown() {
-  // Launch date: October 10, 2026, 00:00:00 (Cairo Time +03:00)
-  const targetDate = new Date('2026-10-10T00:00:00+03:00').getTime();
-  const now = new Date().getTime();
-  const diff = targetDate - now;
+// Learning Paths Hub & Week Cycle Switcher
+function initWeekCycleAndLearningHub() {
+  const savedCycle = localStorage.getItem('nooreldean_week_cycle') || 'week_a';
+  currentWeekCycle = savedCycle;
+  updateWeekCycleUI(savedCycle);
 
-  if (diff <= 0) {
-    cdDaysEl.textContent = '00';
-    cdHoursEl.textContent = '00';
-    cdMinutesEl.textContent = '00';
-    cdSecondsEl.textContent = '00';
-    sprintPercentEl.textContent = '100%';
-    sprintProgressFillEl.style.width = '100%';
-    sprintPhaseEl.textContent = '🚀 تم الإطلاق الرسمي لكوتش دريفت بحمد الله!';
-    return;
+  if (btnCycleWeekA) {
+    btnCycleWeekA.addEventListener('click', () => {
+      setWeekCycle('week_a');
+    });
+  }
+  if (btnCycleWeekB) {
+    btnCycleWeekB.addEventListener('click', () => {
+      setWeekCycle('week_b');
+    });
   }
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  if (btnFocusCodeSession) {
+    btnFocusCodeSession.addEventListener('click', () => {
+      if (timerTaskInput) timerTaskInput.value = 'كود البرمجة وبناء المشاريع مع AI';
+      const btn60 = document.querySelector('.timer-mode-btn[data-time="60"]');
+      if (btn60) btn60.click();
+      if (focusTimerWidget) focusTimerWidget.scrollIntoView({ behavior: 'smooth' });
+      showToast('تم ضبط جلسة كود برمجة 60 دقيقة 🚀');
+    });
+  }
 
-  cdDaysEl.textContent = String(days).padStart(2, '0');
-  cdHoursEl.textContent = String(hours).padStart(2, '0');
-  cdMinutesEl.textContent = String(minutes).padStart(2, '0');
-  cdSecondsEl.textContent = String(seconds).padStart(2, '0');
+  updateLearningFocus();
+}
 
-  // Total sprint duration from Sep 20 to Oct 10 = ~20 days
-  const totalSprintDuration = 20 * 24 * 60 * 60 * 1000;
-  const elapsed = totalSprintDuration - diff;
-  const percent = Math.min(Math.max(Math.round((elapsed / totalSprintDuration) * 100), 10), 98);
+function setWeekCycle(cycle) {
+  currentWeekCycle = cycle;
+  localStorage.setItem('nooreldean_week_cycle', cycle);
+  updateWeekCycleUI(cycle);
+  renderTimeline();
+  updateActiveBlock();
+  updateClock();
+  showToast(cycle === 'week_a' ? 'تم التبديل إلى أسبوع (أ): كلية السبت + الأربعاء' : 'تم التبديل إلى أسبوع (ب): كلية الأربعاء فقط');
+}
 
-  sprintPercentEl.textContent = `${percent}%`;
-  sprintProgressFillEl.style.width = `${percent}%`;
+function updateWeekCycleUI(cycle) {
+  if (btnCycleWeekA && btnCycleWeekB) {
+    if (cycle === 'week_a') {
+      btnCycleWeekA.classList.add('active');
+      btnCycleWeekB.classList.remove('active');
+      if (cycleDescText) cycleDescText.textContent = 'أسبوع (أ): السبت كلية نظري (8-4) + طلبات مسائي (4:30-8:30) | الأربعاء كلية ومونتاج';
+    } else {
+      btnCycleWeekA.classList.remove('active');
+      btnCycleWeekB.classList.add('active');
+      if (cycleDescText) cycleDescText.textContent = 'أسبوع (ب): السبت شيفت طلبات كامل (8ص-8م) | الأربعاء فقط كلية ومونتاج';
+    }
+  }
+}
 
-  if (days > 12) {
-    sprintPhaseEl.textContent = 'المرحلة 1: تجميد الميزات (Feature Freeze)';
-  } else if (days > 5) {
-    sprintPhaseEl.textContent = 'المرحلة 2: تدقيق الجودة والـ Sync (QA & Hardening)';
-  } else if (days > 1) {
-    sprintPhaseEl.textContent = 'المرحلة 3: تجربة حقيقية مع كوتش (Beta Test)';
+function updateLearningFocus() {
+  if (!pathsTodayFocusEl) return;
+  const dayIndex = new Date().getDay();
+  if (dayIndex === 0 || dayIndex === 2) {
+    pathsTodayFocusEl.textContent = '🔴 اليوم لايف 12 ساعة: إنجاز الـ 4 مسارات بالكامل!';
+    pathsTodayFocusEl.style.color = '#f87171';
+  } else if (dayIndex === 1 || dayIndex === 4 || dayIndex === 6) {
+    pathsTodayFocusEl.textContent = '🚴 يوم شيفت طلبات: متابعة كود الـ AI وسماع بودكاست إنجليزي';
+    pathsTodayFocusEl.style.color = '#fb923c';
+  } else if (dayIndex === 3) {
+    pathsTodayFocusEl.textContent = '🎬 يوم الكلية والمونتاج: تصوير ونشر دفعة الشورتس';
+    pathsTodayFocusEl.style.color = '#38bdf8';
   } else {
-    sprintPhaseEl.textContent = 'المرحلة 4: الاستعداد لساعة الصفر (Launch Eve)';
+    pathsTodayFocusEl.textContent = '🕌 يوم الجمعة المبارك: سورة الكهف والراحة وشيفت العصر';
+    pathsTodayFocusEl.style.color = '#34d399';
   }
 }
 
@@ -466,12 +520,7 @@ function renderTimeline() {
   schedule.blocks.forEach((block, idx) => {
     // Filter check
     if (currentFilter !== 'all') {
-      if (currentFilter === 'deepwork' && block.type !== 'deepwork') return;
-      if (currentFilter === 'courses' && block.type !== 'courses') return;
-      if (currentFilter === 'college' && block.type !== 'college') return;
-      if (currentFilter === 'prayer' && block.type !== 'prayer') return;
-      if (currentFilter === 'coaching' && block.type !== 'coaching') return;
-      if (currentFilter === 'living' && block.type !== 'living') return;
+      if (block.type !== currentFilter) return;
     }
 
     const startM = timeToMinutes(block.start);
@@ -1222,8 +1271,8 @@ if (clearCompletedScratchBtn) {
 // ==========================================================================
 function init() {
   AudioService.updateUI();
+  initWeekCycleAndLearningHub();
   updateClock();
-  updateSprintCountdown();
   renderTimeline();
   updateActiveBlock();
   loadHabits();
@@ -1234,7 +1283,6 @@ function init() {
 
   // Tickers
   setInterval(updateClock, 1000);
-  setInterval(updateSprintCountdown, 1000);
   setInterval(updateActiveBlock, 15000); // Check active block every 15s
 }
 
