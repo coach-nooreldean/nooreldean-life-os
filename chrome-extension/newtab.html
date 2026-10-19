@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nooreldean Focus Tab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient-glow glow-emerald"></div>
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-purple"></div>
+
+  <div class="tab-container">
+    <!-- Header: Branding & Schedule Selector -->
+    <header class="top-nav">
+      <div class="brand-group">
+        <div class="logo-box">
+          <img src="icons/icon-48.png" alt="Life OS Icon" width="32" height="32" class="brand-icon">
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">NOORELDEAN</span>
+          <span class="brand-tag">FOCUS TAB</span>
+        </div>
+      </div>
+
+      <div class="schedule-selector-wrap">
+        <label for="scheduleSelect" class="selector-label">الجدول المعتمد:</label>
+        <select id="scheduleSelect" class="selector-dropdown">
+          <option value="auto">🔄 تلقائي حسب اليوم الحالي</option>
+          <option value="live_study">🔴 لايف Study With Me (12 ساعة)</option>
+          <option value="talabat_full">🚴 شيفت طلبات كامل (12 ساعة)</option>
+          <option value="wednesday">🎓 الأربعاء: كلية عملي ومونتاج شورتس</option>
+          <option value="saturday_college">🎓 السبت: كلية نظري وطلبات</option>
+          <option value="friday">🕌 الجمعة: روحانيات وطلبات مسائي</option>
+        </select>
+      </div>
+
+      <div class="nav-controls">
+        <button id="customLinksBtn" class="icon-btn" title="تخصيص الروابط السريعة">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        </button>
+        <button id="lifeOsRedirectBtn" class="icon-btn" title="فتح نظام Life OS الكامل">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Hero: Clock & Prayer Countdown -->
+    <section class="hero-section">
+      <div class="clock-display" id="clockDisplay">12:00:00</div>
+      <div class="date-badge-row">
+        <span class="day-badge" id="dayNameBadge">--</span>
+        <span class="date-text" id="gregorianDate">--</span>
+        <span class="dot-separator">•</span>
+        <span class="next-prayer-chip" id="nextPrayerChip">
+          <span class="prayer-icon">🕌</span>
+          <span id="nextPrayerText">جاري حساب مواقيت الصلاة...</span>
+        </span>
+      </div>
+
+      <!-- Prayer Times Strip -->
+      <div class="prayer-strip" id="prayerStrip">
+        <div class="prayer-pill" data-prayer="fajr">
+          <span class="p-name">الفجر</span>
+          <span class="p-time" id="prayerFajr">--:--</span>
+        </div>
+        <div class="prayer-pill" data-prayer="dhuhr">
+          <span class="p-name">الظهر</span>
+          <span class="p-time" id="prayerDhuhr">--:--</span>
+        </div>
+        <div class="prayer-pill" data-prayer="asr">
+          <span class="p-name">العصر</span>
+          <span class="p-time" id="prayerAsr">--:--</span>
+        </div>
+        <div class="prayer-pill" data-prayer="maghrib">
+          <span class="p-name">المغرب</span>
+          <span class="p-time" id="prayerMaghrib">--:--</span>
+        </div>
+        <div class="prayer-pill" data-prayer="isha">
+          <span class="p-name">العشاء</span>
+          <span class="p-time" id="prayerIsha">--:--</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Schedule Block Card -->
+    <section class="active-block-section">
+      <div class="active-block-card" id="activeBlockCard">
+        <div class="card-glow"></div>
+        <div class="block-top-row">
+          <div class="live-pill">
+            <span class="live-pulse"></span>
+            <span class="live-label">البلوك النشط الآن</span>
+          </div>
+          <span class="block-time-range" id="blockTimeRange">--:-- - --:--</span>
+          <span class="block-remaining-badge" id="blockRemaining">متبقي -- دقيقة</span>
+        </div>
+
+        <div class="block-content">
+          <div class="block-emoji" id="blockEmoji">⏳</div>
+          <div class="block-text">
+            <h2 class="block-title" id="blockTitle">جاري تحميل جدولك...</h2>
+            <p class="block-desc" id="blockDesc">لحظات ويتم تحديد البلوك الحالي بناءً على التوقيت المحلي.</p>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-track">
+          <div class="progress-fill" id="blockProgressFill" style="width: 0%;"></div>
+        </div>
+
+        <div class="block-bottom-row">
+          <span class="next-block-label">البلوك القادم:</span>
+          <span class="next-block-title" id="nextBlockTitle">--</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smart Command Search Bar -->
+    <section class="search-section">
+      <form id="searchForm" class="search-bar-wrap">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="ابحث في Google أو اكتب (gh للجيتهب، sb لسوبابيس، cd لكوتش دريفت، yt لليوتيوب)..."
+          autocomplete="off"
+          autofocus
+        >
+        <div class="search-shortcuts-hint">
+          <span class="kbd-shortcut">↵ Enter للبحث</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Split Grid: Quick Links & Today Focus Tasks -->
+    <section class="widgets-grid">
+      <!-- Card 1: Fast Links -->
+      <div class="widget-card quick-links-card">
+        <div class="widget-head">
+          <div class="widget-title-group">
+            <span class="widget-icon">⚡</span>
+            <h3 class="widget-title">منصات ومشاريع العمل</h3>
+          </div>
+          <button id="addQuickLinkBtn" class="btn-text-action" title="إضافة رابط جديد">+ إضافة</button>
+        </div>
+        <div class="links-grid" id="linksGrid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Card 2: Today 3 Focus Goals -->
+      <div class="widget-card focus-tasks-card">
+        <div class="widget-head">
+          <div class="widget-title-group">
+            <span class="widget-icon">🎯</span>
+            <h3 class="widget-title">أهداف التركيز اليومية (Daily Focus)</h3>
+          </div>
+          <span class="tasks-counter" id="tasksCounter">0 / 3</span>
+        </div>
+
+        <div class="tasks-list" id="tasksList">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <form id="addTaskForm" class="add-task-form">
+          <input 
+            type="text" 
+            id="newTaskInput" 
+            class="task-input" 
+            placeholder="أضف هدفاً رئيسياً لليوم واضغط Enter..." 
+            maxlength="70"
+          >
+          <button type="submit" class="btn-add-task">+</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Daily Wisdom Footer -->
+    <footer class="tab-footer">
+      <div class="wisdom-card">
+        <span class="wisdom-quote" id="wisdomQuote">«وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ • وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ»</span>
+      </div>
+      <div class="keyboard-legend">
+        <span><kbd>/</kbd> للتركيز على البحث</span>
+        <span>•</span>
+        <span><kbd>N</kbd> لإضافة هدف تركيز جديد</span>
+        <span>•</span>
+        <span>Nooreldean Life OS Ecosystem</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Custom Link Modal -->
+  <div id="linkModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">إضافة رابط وصول سريع</h3>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+      <form id="linkForm" class="modal-body">
+        <div class="form-group">
+          <label for="linkTitleInput">اسم المنصة / المشروع:</label>
+          <input type="text" id="linkTitleInput" placeholder="مثال: Supabase Dashboard" required>
+        </div>
+        <div class="form-group">
+          <label for="linkUrlInput">الرابط (URL):</label>
+          <input type="url" id="linkUrlInput" placeholder="https://..." required>
+        </div>
+        <div class="form-group">
+          <label for="linkIconInput">أيقونة أو إيموجي:</label>
+          <input type="text" id="linkIconInput" placeholder="⚡ أو 🚀 أو 🌐" maxlength="4" value="🔗">
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancelModalBtn" class="btn-secondary">إلغاء</button>
+          <button type="submit" class="btn-primary">حفظ الرابط</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="newtab.js"></script>
+</body>
+</html>

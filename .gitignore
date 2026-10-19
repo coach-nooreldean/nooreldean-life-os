@@ -1,2 +1,5 @@
 .vercel
 .bot
+
+# Local scratchpad and context memory
+.scratch/
