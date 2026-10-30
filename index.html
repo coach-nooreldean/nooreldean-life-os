@@ -231,7 +231,7 @@
         <span class="cycle-icon">🔄</span>
         <div>
           <span class="cycle-label">نظام الأسبوع التبادلي للكلية وطلبات:</span>
-          <span class="cycle-desc" id="cycleDescText">أسبوع (أ): كلية السبت + الأربعاء | أسبوع (ب): كلية الأربعاء فقط (السبت طلبات كامل)</span>
+          <span class="cycle-desc" id="cycleDescText">أسبوع (أ): السبت كلية نظري (8-4) + طلبات مسائي | أسبوع (ب): الإثنين كلية أونلاين (4م-10م) والسبت طلبات كامل</span>
         </div>
       </div>
       <div class="week-cycle-buttons">
@@ -241,7 +241,7 @@
         </button>
         <button class="cycle-btn" id="btnCycleWeekB" data-cycle="week_b">
           <span class="cycle-indicator-dot"></span>
-          <span>أسبوع (ب): كلية الأربعاء فقط</span>
+          <span>أسبوع (ب): كلية أونلاين الإثنين + الأربعاء</span>
         </button>
       </div>
     </div>
@@ -261,7 +261,12 @@
       <button class="nav-tab" data-day-type="talabat_full" id="tabTalabatFull">
         <span class="tab-icon">🚴</span>
         <span class="tab-text">شيفت طلبات كامل</span>
-        <span class="tab-sub">الإثنين • الخميس • وسبت (ب)</span>
+        <span class="tab-sub">الخميس • إثنين (أ) • سبت (ب)</span>
+      </button>
+      <button class="nav-tab" data-day-type="monday_online_college" id="tabMondayOnline">
+        <span class="tab-icon">💻</span>
+        <span class="tab-text">الإثنين أسبوع (ب)</span>
+        <span class="tab-sub">طلبات صباحي + كلية أونلاين 4م-10م</span>
       </button>
       <button class="nav-tab" data-day-type="wednesday" id="tabWednesday">
         <span class="tab-icon">🎬</span>
@@ -420,7 +425,12 @@
               <h2 class="column-title">سلاسل وصناعة المحتوى 🎬</h2>
               <p class="column-desc">جلسة كتابة وتصوير مجمعة أسبوعياً لزيادة المبيعات</p>
             </div>
-            <button class="btn-primary-sm" id="addNewIdeaBtn">+ فكرة جديدة</button>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+              <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer" class="btn-action" style="background: rgba(0, 242, 254, 0.12); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.3); text-decoration: none; font-size: 0.78rem; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; font-weight: 600;">
+                <span>🚀</span> كونسول Content Dashboard
+              </a>
+              <button class="btn-primary-sm" id="addNewIdeaBtn">+ فكرة جديدة</button>
+            </div>
           </div>
 
           <!-- Series Selector Tabs -->

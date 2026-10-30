@@ -99,6 +99,30 @@ const SCHEDULES = {
       { start: '22:30', end: '05:30', icon: '💤', title: 'نوم عميق 7 ساعات استعداداً للايف الأحد 7ص', desc: 'نوم عميق وكافي لتكون في قمة طاقتك للايف الـ 12 ساعة غداً.', type: 'sleep', tag: '#نوم_7_ساعات' }
     ]
   },
+  monday_online_college: {
+    id: 'monday_online_college',
+    name: 'الإثنين أسبوع (ب) (طلبات صباحي + كلية أونلاين 4م-10م)',
+    badge: '🚴 طلبات 8ص-3:15م + 💻 كلية أونلاين 4م-10م',
+    category: 'monday_online_college',
+    blocks: [
+      { start: '05:30', end: '06:45', icon: '🌅', title: 'الفجر في وقته + فطور طاقة وتجهيز عدة الشغل والباور بانك', desc: 'صلاة الفجر في المسجد، فطور مشبع غني بالطاقة، التأكد من شحن الهاتف والباور بانك، وتجهيز دراجة/سكوتر الشغل.', type: 'prayer', tag: '#فجر_وتجهيز' },
+      { start: '06:45', end: '07:45', icon: '💻', title: 'جلسة كود فجرية / توجيه Antigravity بمهام اليوم', desc: 'إطلاق مهام الكود للـ AI ليعمل في الخلفية أثناء النهار، ومراجعة سريعة قبل مغادرة المنزل.', type: 'deepwork', tag: '#توجيه_الـAI' },
+      { start: '07:45', end: '08:00', icon: '🚴', title: 'التحرك لمنطقة الشغل وفتح تطبيق طلبات 8:00 ص', desc: 'الوصول لنقطة التمركز وبدء الشيفت في تمام 8:00 صباحاً.', type: 'talabat', tag: '#بدء_الشيفت' },
+      { start: '08:00', end: '12:45', icon: '🚴', title: '[فترة 1 طلبات صباحي] أوردرات الصباح والسوبرماركت', desc: 'تنفيذ أوردرات الصباح بسرعة مع شرب الماء باستمرار وتطبيق قواعد الأمان والسلامة.', type: 'talabat', tag: '#أوردرات_الصباح' },
+      { start: '12:45', end: '12:55', icon: '🕌', title: 'صلاة الظهر في المسجد (راحة 10 دقائق)', desc: 'إيقاف مؤقت للطلبات 10 دقائق، أداء صلاة الظهر في أقرب مسجد ومياه وسناك سريع واستئناف العمل.', type: 'prayer', tag: '#صلاة_الظهر' },
+      { start: '12:55', end: '15:15', icon: '🚴', title: '[فترة 2 طلبات] ذروة الغداء وتحقيق تارجت اليوم', desc: 'استغلال ساعات ذروة الغداء وتحقيق دخل ممتاز قبل التوجه للمنزل للكلية الأونلاين.', type: 'talabat', tag: '#ذروة_الغداء' },
+      { start: '15:15', end: '16:00', icon: '🏠', title: 'إنهاء الشيفت والعودة للمنزل + دش وتجهيز اللابتوب', desc: 'قفل تطبيق طلبات، العودة للبيت، دش سريع منعش، شرب قهوة وتجهيز منصة الكلية الأونلاين.', type: 'living', tag: '#استعداد_للكلية' },
+      { start: '16:00', end: '16:30', icon: '💻', title: '[كلية أونلاين] بدء المحاضرات والسكاشن التفاعلية (4:00 م)', desc: 'حضور المحاضرة الأولى بتركيز، تدوين النقاط الرئيسية وفتح السلايدات.', type: 'college', tag: '#محاضرات_أونلاين' },
+      { start: '16:30', end: '16:50', icon: '🕌', title: 'صلاة العصر في وقتها', desc: 'أداء صلاة العصر في وقتها واستئناف المحاضرات فوراً.', type: 'prayer', tag: '#صلاة_العصر' },
+      { start: '16:50', end: '18:45', icon: '💻', title: '[كلية أونلاين] استكمال الشرح والتطبيقات والمناقشات', desc: 'فترة المحاضرات الأساسية والمناقشات الأكاديمية مع الأساتذة والزملاء.', type: 'college', tag: '#شرح_أكاديمي' },
+      { start: '18:45', end: '19:15', icon: '🕌', title: 'صلاة المغرب فور الأذان + سناك واستراحة خفيفة', desc: 'أداء صلاة المغرب، شرب مياه وسناك خفيف لاستعادة التركيز للجزء المسائي.', type: 'prayer', tag: '#صلاة_المغرب' },
+      { start: '19:15', end: '20:30', icon: '💻', title: '[كلية أونلاين] سكاشن المساء والتطبيقات العملية والتمارين', desc: 'حل التمارين والمسائل العملية المباشرة وتسجيل متطلبات التكليفات القادمة.', type: 'college', tag: '#سكاشن_أونلاين' },
+      { start: '20:30', end: '21:00', icon: '🕌', title: 'صلاة العشاء في وقتها بالمسجد', desc: 'أداء صلاة العشاء بالمسجد جماعة.', type: 'prayer', tag: '#صلاة_العشاء' },
+      { start: '21:00', end: '22:00', icon: '💻', title: '[كلية أونلاين] ختام اليوم الدراسي أونلاين وتسليم التكليفات', desc: 'إنهاء آخر جلسة دراسية أونلاين 10:00 م بالضبط، تسليم الواجبات اليومية وحفظ السلايدات.', type: 'college', tag: '#ختام_الكلية_10م' },
+      { start: '22:00', end: '22:30', icon: '🍲', title: 'عشاء مغذي + غسيل الأطباق وبروتوكول قفل الشاشات', desc: 'تناول عشاء صحي بيتي، Zero Dishes، قفل اللابتوب والتهيئة لنوم هادئ 10:30 م.', type: 'shutdown', tag: '#حماية_النوم' },
+      { start: '22:30', end: '05:30', icon: '💤', title: 'نوم عميق 7 ساعات استعداداً للايف الثلاثاء 7:00 ص', desc: 'نوم 7 ساعات كاملة للاستيقاظ 5:30 ص في قمة النشاط للايف الـ 12 ساعة.', type: 'sleep', tag: '#نوم_7_ساعات' }
+    ]
+  },
   friday: {
     id: 'friday',
     name: 'يوم الجمعة (روحانيات وعائلة + طلبات مسائي)',
@@ -122,34 +146,61 @@ const SCHEDULES = {
   }
 };
 
-// Initial Content Ideas Seed
+// Initial Content Ideas Seed (Synced with Content Dashboard - Month 11)
 const INITIAL_CONTENT_IDEAS = [
   {
     id: 'idea-1',
-    series: 'workout',
-    title: 'إزاي تصمم تمرينك بنفسك في دقيقة',
-    hook: 'لو دخلت الجيم ومش عارف تبدأ بجدول إيه، الفيديو ده هيخليك تصمم تمرينك بنفسك!',
-    cta: 'ابعتلي "تمرين" في رسايل الصفحة عشان أساعدك بجدول مخصص لهدفك.',
+    series: 'diet',
+    title: 'معادلة تضخيم الشتاء النظيف (Clean Bulk vs Dirty Bulk) ⚖️',
+    hook: 'لو داخل تضخيم الشتاء وفاكر إنك هتاكل الأخضر واليابس عشان تملى الهدوم.. إنت مش بتعمل كتلة، إنت بتبني كرش هتلف وراه 6 شهور في الصيف!',
+    cta: 'اكتب كلمة (تضخيم) في الكومنتات وهبعتلك حاسبة السعرات المجانية مع جدول سعرات الشتاء PDF على الخاص فوراً!',
     status: 'draft',
     statusLabel: 'مسودة ✍️'
   },
   {
     id: 'idea-2',
     series: 'diet',
-    title: 'إزاي تحسب سعراتك وتاكل اللي بتحبه وتخس',
-    hook: 'بلاش تدفع آلاف في دايت قاسي يرجعك للصفر! هقولك إزاي تحسب سعراتك بالجرام.',
-    cta: 'ابعتلي "دايت" على الخاص عشان أحسبلك احتياجك بالظبط.',
-    status: 'idea',
-    statusLabel: 'فكرة 💡'
+    title: 'بروتين الغلابة للطلاب (140 جرام بروتين بـ 55 جنيه) 🍳',
+    hook: 'مين أقنعك إنك لازم تصرف 4000 جنيه في علبة واي بروتين عشان تبني عضلات؟ ده منيو بروتين الطالب بـ 55 جنيه في اليوم بس!',
+    cta: 'اكتب (بروتين) في التعليقات وهبعتلك دليل تسوق الطالب الاقتصادي كامل PDF مجاناً.',
+    status: 'draft',
+    statusLabel: 'مسودة ✍️'
   },
   {
     id: 'idea-3',
     series: 'workout',
-    title: 'أكبر غلطة بتضيع عضلاتك في الجيم',
-    hook: 'بتتمرن بقالك 6 شهور وجسمك مش بيتغير؟ الغلطة دي بنسبة 90% هي السبب!',
-    cta: 'تابع الحساب واستنى الجزء التاني بكرة.',
+    title: 'لغز النحيف (ليه وزنك ثابت رغم إنك بتاكل كتير؟) 🧬',
+    hook: 'أنا باكل كتير جداً في الشتاء وبدخل الجيم ومفيش جرام بيزيد.. الجملة دي أكبر وهم بتضحك بيه على نفسك!',
+    cta: 'احسب سعراتك بالجرام في ثانية من اللينك في البايو، أو اكتب (سعرات) وهبعتلك الرابط على الخاص.',
+    status: 'idea',
+    statusLabel: 'فكرة 💡'
+  },
+  {
+    id: 'idea-4',
+    series: 'workout',
+    title: 'سر الكارب المعقد في الشتاء: طاقة للمذاكرة وضخ دم في الجيم ⚡',
+    hook: 'لو بتدخل الجيم في الشتاء همدان وتعبان، ومش قادر تركز في المذاكرة بعدها.. المشكلة مش قلة نوم، المشكلة في نوع الكارب اللي بتاكله!',
+    cta: 'اكتب (تضخيم) وهبعتلك خطة وجبات الشتاء المقسمة لمواعيد كليتك ومذاكرتك.',
+    status: 'idea',
+    statusLabel: 'فكرة 💡'
+  },
+  {
+    id: 'idea-5',
+    series: 'workout',
+    title: 'إزاي تصمم تمرينك بنفسك في دقيقة',
+    hook: 'لو دخلت الجيم ومش عارف تبدأ بجدول إيه، الفيديو ده هيخليك تصمم تمرينك بنفسك!',
+    cta: 'ابعتلي "تمرين" في رسايل الصفحة عشان أساعدك بجدول مخصص لهدفك.',
     status: 'recorded',
     statusLabel: 'تم التصوير 🎬'
+  },
+  {
+    id: 'idea-6',
+    series: 'diet',
+    title: 'إزاي تحسب سعراتك وتاكل اللي بتحبه وتخس',
+    hook: 'بلاش تدفع آلاف في دايت قاسي يرجعك للصفر! هقولك إزاي تحسب سعراتك بالجرام.',
+    cta: 'ابعتلي "دايت" على الخاص عشان أحسبلك احتياجك بالظبط.',
+    status: 'published',
+    statusLabel: 'تم النشر 🚀'
   }
 ];
 
@@ -192,7 +243,7 @@ const INITIAL_SCRATCHPAD = {
 };
 
 // State Management
-let currentSelectedDayType = 'auto'; // 'auto' | 'live_study' | 'talabat_full' | 'wednesday' | 'saturday_college' | 'friday'
+let currentSelectedDayType = 'auto'; // 'auto' | 'live_study' | 'talabat_full' | 'wednesday' | 'saturday_college' | 'monday_online_college' | 'friday'
 let currentWeekCycle = localStorage.getItem('nooreldean_week_cycle') || 'week_a'; // 'week_a' | 'week_b'
 let currentFilter = 'all';
 let currentSeriesTab = 'workout';
@@ -283,7 +334,10 @@ function getTodayDayScheduleKey() {
   const cycle = localStorage.getItem('nooreldean_week_cycle') || 'week_a';
 
   if (dayIndex === 0 || dayIndex === 2) return 'live_study'; // Sun, Tue (Live Study With Me 7am-7pm)
-  if (dayIndex === 1 || dayIndex === 4) return 'talabat_full'; // Mon, Thu (Talabat Shift 8am-8pm)
+  if (dayIndex === 1) { // Mon
+    return cycle === 'week_b' ? 'monday_online_college' : 'talabat_full';
+  }
+  if (dayIndex === 4) return 'talabat_full'; // Thu (Talabat Shift 8am-8pm)
   if (dayIndex === 3) return 'wednesday'; // Wed (College + Shorts Content)
   if (dayIndex === 5) return 'friday'; // Fri (Family + Talabat Evening)
   if (dayIndex === 6) { // Sat
@@ -382,7 +436,7 @@ function setWeekCycle(cycle) {
   renderTimeline();
   updateActiveBlock();
   updateClock();
-  showToast(cycle === 'week_a' ? 'تم التبديل إلى أسبوع (أ): كلية السبت + الأربعاء' : 'تم التبديل إلى أسبوع (ب): كلية الأربعاء فقط');
+  showToast(cycle === 'week_a' ? 'تم التبديل إلى أسبوع (أ): كلية السبت + الأربعاء' : 'تم التبديل إلى أسبوع (ب): كلية أونلاين الإثنين (4-10م) + كلية الأربعاء');
 }
 
 function updateWeekCycleUI(cycle) {
@@ -390,11 +444,11 @@ function updateWeekCycleUI(cycle) {
     if (cycle === 'week_a') {
       btnCycleWeekA.classList.add('active');
       btnCycleWeekB.classList.remove('active');
-      if (cycleDescText) cycleDescText.textContent = 'أسبوع (أ): السبت كلية نظري (8-4) + طلبات مسائي (4:30-8:30) | الأربعاء كلية ومونتاج';
+      if (cycleDescText) cycleDescText.textContent = 'أسبوع (أ): السبت كلية نظري (8-4) + طلبات مسائي (4:30-8:30) | الإثنين طلبات كامل';
     } else {
       btnCycleWeekA.classList.remove('active');
       btnCycleWeekB.classList.add('active');
-      if (cycleDescText) cycleDescText.textContent = 'أسبوع (ب): السبت شيفت طلبات كامل (8ص-8م) | الأربعاء فقط كلية ومونتاج';
+      if (cycleDescText) cycleDescText.textContent = 'أسبوع (ب): الإثنين كلية أونلاين (4م-10م) | السبت شيفت طلبات كامل (8ص-8م)';
     }
   }
 }
@@ -402,15 +456,27 @@ function updateWeekCycleUI(cycle) {
 function updateLearningFocus() {
   if (!pathsTodayFocusEl) return;
   const dayIndex = new Date().getDay();
+  const cycle = localStorage.getItem('nooreldean_week_cycle') || 'week_a';
   if (dayIndex === 0 || dayIndex === 2) {
     pathsTodayFocusEl.textContent = '🔴 اليوم لايف 12 ساعة: إنجاز الـ 4 مسارات بالكامل!';
     pathsTodayFocusEl.style.color = '#f87171';
-  } else if (dayIndex === 1 || dayIndex === 4 || dayIndex === 6) {
+  } else if (dayIndex === 1) {
+    if (cycle === 'week_b') {
+      pathsTodayFocusEl.textContent = '💻 يوم الكلية أونلاين (4م - 10م): متابعة المحاضرات والسكاشن أونلاين';
+      pathsTodayFocusEl.style.color = '#a78bfa';
+    } else {
+      pathsTodayFocusEl.textContent = '🚴 يوم شيفت طلبات كامل: متابعة كود الـ AI وسماع بودكاست إنجليزي';
+      pathsTodayFocusEl.style.color = '#fb923c';
+    }
+  } else if (dayIndex === 4 || (dayIndex === 6 && cycle === 'week_b')) {
     pathsTodayFocusEl.textContent = '🚴 يوم شيفت طلبات: متابعة كود الـ AI وسماع بودكاست إنجليزي';
     pathsTodayFocusEl.style.color = '#fb923c';
   } else if (dayIndex === 3) {
     pathsTodayFocusEl.textContent = '🎬 يوم الكلية والمونتاج: تصوير ونشر دفعة الشورتس';
     pathsTodayFocusEl.style.color = '#38bdf8';
+  } else if (dayIndex === 6 && cycle === 'week_a') {
+    pathsTodayFocusEl.textContent = '🎓 يوم كلية نظري صباحاً + طلبات مسائي: تدوين المحاضرات والتركيز';
+    pathsTodayFocusEl.style.color = '#fbbf24';
   } else {
     pathsTodayFocusEl.textContent = '🕌 يوم الجمعة المبارك: سورة الكهف والراحة وشيفت العصر';
     pathsTodayFocusEl.style.color = '#34d399';
